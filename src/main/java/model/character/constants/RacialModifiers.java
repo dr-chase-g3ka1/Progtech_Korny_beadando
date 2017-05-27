@@ -40,7 +40,7 @@ public final class RacialModifiers {
         DwarfModifierValues = new ModifierValues(1, 0, 2, 0, 0, 1);
         DWARF_MODIFIER = new Modifier(true, DwarfModifierValues);
         
-        ElfModifierValues = new ModifierValues(0, 1, 0, 2, 0, 1);
+        ElfModifierValues = new ModifierValues(0, 1, 0, 2, 0, 0);
         ELF_MODIFIER = new Modifier(true, ElfModifierValues);
         
         OrcModifierValues = new ModifierValues(3, 0, 2, -1, -1, 0);

@@ -96,51 +96,51 @@ public class RacialModifiersTest {
     @Test
     public void HumanTestCase()    {
         assertEquals("FAILED! - HumanTestCase (Racial Modifiers - Body) ===> getModifiedBody()", 5, testHuman.getModifiedBody() );
-        assertEquals("FAILED! - HumanTestCase (Racial Modifiers - Agility) ===> getModifiedBody()", 5, testHuman.getModifiedAgility());
-        assertEquals("FAILED! - HumanTestCase (Racial Modifiers - Strength) ===> getModifiedBody()", 5, testHuman.getModifiedStrength());
-        assertEquals("FAILED! - HumanTestCase (Racial Modifiers - Charisma) ===> getModifiedBody()", 5, testHuman.getModifiedCharisma());
-        assertEquals("FAILED! - HumanTestCase (Racial Modifiers - Intelligence) ===> getModifiedBody()", 5, testHuman.getModifiedIntelligence());
-        assertEquals("FAILED! - HumanTestCase (Racial Modifiers - Willpower) ===> getModifiedBody()", 5, testHuman.getModifiedWillpower());
+        assertEquals("FAILED! - HumanTestCase (Racial Modifiers - Agility) ===> getModifiedAgility()", 5, testHuman.getModifiedAgility());
+        assertEquals("FAILED! - HumanTestCase (Racial Modifiers - Strength) ===> getModifiedStrength()", 5, testHuman.getModifiedStrength());
+        assertEquals("FAILED! - HumanTestCase (Racial Modifiers - Charisma) ===> getModifiedCharisma()", 5, testHuman.getModifiedCharisma());
+        assertEquals("FAILED! - HumanTestCase (Racial Modifiers - Intelligence) ===> getModifiedIntelligence()", 5, testHuman.getModifiedIntelligence());
+        assertEquals("FAILED! - HumanTestCase (Racial Modifiers - Willpower) ===> getModifiedWillpower()", 5, testHuman.getModifiedWillpower());
     }
     
     @Test
     public void DwarfTestCase()    {
         assertEquals("FAILED! - DwarfTestCase (Racial Modifiers - Body) ===> getModifiedBody()", 6, testDwarf.getModifiedBody() );
-        assertEquals("FAILED! - DwarfTestCase (Racial Modifiers - Agility) ===> getModifiedBody()", 5, testDwarf.getModifiedAgility());
-        assertEquals("FAILED! - DwarfTestCase (Racial Modifiers - Strength) ===> getModifiedBody()", 7, testDwarf.getModifiedStrength());
-        assertEquals("FAILED! - DwarfTestCase (Racial Modifiers - Charisma) ===> getModifiedBody()", 5, testDwarf.getModifiedCharisma());
-        assertEquals("FAILED! - DwarfTestCase (Racial Modifiers - Intelligence) ===> getModifiedBody()", 5, testDwarf.getModifiedIntelligence());
-        assertEquals("FAILED! - DwarfTestCase (Racial Modifiers - Willpower) ===> getModifiedBody()", 6, testDwarf.getModifiedWillpower());
+        assertEquals("FAILED! - DwarfTestCase (Racial Modifiers - Agility) ===> getModifiedAgility()", 5, testDwarf.getModifiedAgility());
+        assertEquals("FAILED! - DwarfTestCase (Racial Modifiers - Strength) ===> getModifiedStrength()", 7, testDwarf.getModifiedStrength());
+        assertEquals("FAILED! - DwarfTestCase (Racial Modifiers - Charisma) ===> getModifiedCharisma()", 5, testDwarf.getModifiedCharisma());
+        assertEquals("FAILED! - DwarfTestCase (Racial Modifiers - Intelligence) ===> getModifiedIntelligence()", 5, testDwarf.getModifiedIntelligence());
+        assertEquals("FAILED! - DwarfTestCase (Racial Modifiers - Willpower) ===> getModifiedWillpower()", 6, testDwarf.getModifiedWillpower());
     }
     
     @Test
     public void OrcTestCase()    {
         assertEquals("FAILED! - OrcTestCase (Racial Modifiers - Body) ===> getModifiedBody()", 8, testOrc.getModifiedBody() );
-        assertEquals("FAILED! - OrcTestCase (Racial Modifiers - Agility) ===> getModifiedBody()", 5, testOrc.getModifiedAgility());
-        assertEquals("FAILED! - OrcTestCase (Racial Modifiers - Strength) ===> getModifiedBody()", 7, testOrc.getModifiedStrength());
-        assertEquals("FAILED! - OrcTestCase (Racial Modifiers - Charisma) ===> getModifiedBody()", 4, testOrc.getModifiedCharisma());
-        assertEquals("FAILED! - OrcTestCase (Racial Modifiers - Intelligence) ===> getModifiedBody()", 4, testOrc.getModifiedIntelligence());
-        assertEquals("FAILED! - OrcTestCase (Racial Modifiers - Willpower) ===> getModifiedBody()", 5, testOrc.getModifiedWillpower());
+        assertEquals("FAILED! - OrcTestCase (Racial Modifiers - Agility) ===> getModifiedAgility()", 5, testOrc.getModifiedAgility());
+        assertEquals("FAILED! - OrcTestCase (Racial Modifiers - Strength) ===> getModifiedStrength()", 7, testOrc.getModifiedStrength());
+        assertEquals("FAILED! - OrcTestCase (Racial Modifiers - Charisma) ===> getModifiedCharisma()", 4, testOrc.getModifiedCharisma());
+        assertEquals("FAILED! - OrcTestCase (Racial Modifiers - Intelligence) ===> getModifiedIntelligence()", 4, testOrc.getModifiedIntelligence());
+        assertEquals("FAILED! - OrcTestCase (Racial Modifiers - Willpower) ===> getModifiedWillpower()", 5, testOrc.getModifiedWillpower());
     }
     
     @Test
     public void TrollTestCase()    {
         assertEquals("FAILED! - TrollTestCase (Racial Modifiers - Body) ===> getModifiedBody()", 10, testTroll.getModifiedBody() );
-        assertEquals("FAILED! - TrollTestCase (Racial Modifiers - Agility) ===> getModifiedBody()", 4, testTroll.getModifiedAgility());
-        assertEquals("FAILED! - TrollTestCase (Racial Modifiers - Strength) ===> getModifiedBody()", 9, testTroll.getModifiedStrength());
-        assertEquals("FAILED! - TrollTestCase (Racial Modifiers - Charisma) ===> getModifiedBody()", 3, testTroll.getModifiedCharisma());
-        assertEquals("FAILED! - TrollTestCase (Racial Modifiers - Intelligence) ===> getModifiedBody()", 3, testTroll.getModifiedIntelligence());
-        assertEquals("FAILED! - TrollTestCase (Racial Modifiers - Willpower) ===> getModifiedBody()", 5, testTroll.getModifiedWillpower());
+        assertEquals("FAILED! - TrollTestCase (Racial Modifiers - Agility) ===> getModifiedAgility()", 4, testTroll.getModifiedAgility());
+        assertEquals("FAILED! - TrollTestCase (Racial Modifiers - Strength) ===> getModifiedStrength()", 9, testTroll.getModifiedStrength());
+        assertEquals("FAILED! - TrollTestCase (Racial Modifiers - Charisma) ===> getModifiedCharisma()", 3, testTroll.getModifiedCharisma());
+        assertEquals("FAILED! - TrollTestCase (Racial Modifiers - Intelligence) ===> getModifiedIntelligence()", 3, testTroll.getModifiedIntelligence());
+        assertEquals("FAILED! - TrollTestCase (Racial Modifiers - Willpower) ===> getModifiedWillpower()", 5, testTroll.getModifiedWillpower());
     }
     
     @Test
     public void ElfTestCase()    {
         assertEquals("FAILED! - ElfTestCase (Racial Modifiers - Body) ===> getModifiedBody()", 5, testElf.getModifiedBody() );
-        assertEquals("FAILED! - ElfTestCase (Racial Modifiers - Agility) ===> getModifiedBody()", 6, testElf.getModifiedAgility());
-        assertEquals("FAILED! - ElfTestCase (Racial Modifiers - Strength) ===> getModifiedBody()", 5, testElf.getModifiedStrength());
-        assertEquals("FAILED! - ElfTestCase (Racial Modifiers - Charisma) ===> getModifiedBody()", 7, testElf.getModifiedCharisma());
-        assertEquals("FAILED! - ElfTestCase (Racial Modifiers - Intelligence) ===> getModifiedBody()", 5, testElf.getModifiedIntelligence());
-        assertEquals("FAILED! - ElfTestCase (Racial Modifiers - Willpower) ===> getModifiedBody()", 5, testElf.getModifiedWillpower());
+        assertEquals("FAILED! - ElfTestCase (Racial Modifiers - Agility) ===> getModifiedAgility()", 6, testElf.getModifiedAgility());
+        assertEquals("FAILED! - ElfTestCase (Racial Modifiers - Strength) ===> getModifiedStrength()", 5, testElf.getModifiedStrength());
+        assertEquals("FAILED! - ElfTestCase (Racial Modifiers - Charisma) ===> getModifiedCharisma()", 7, testElf.getModifiedCharisma());
+        assertEquals("FAILED! - ElfTestCase (Racial Modifiers - Intelligence) ===> getModifiedIntelligence()", 5, testElf.getModifiedIntelligence());
+        assertEquals("FAILED! - ElfTestCase (Racial Modifiers - Willpower) ===> getModifiedWillpower()", 5, testElf.getModifiedWillpower());
     }
     
 }
