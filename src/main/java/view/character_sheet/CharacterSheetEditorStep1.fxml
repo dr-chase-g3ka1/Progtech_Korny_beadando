@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="411.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.character_sheet.CharacterSheetEditorStep1Controller">
+   <children>
+      <GridPane layoutX="12.0" layoutY="10.0" prefHeight="291.0" prefWidth="540.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Select Spellcaster Type:" />
+            <Label text="Select Race:" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="SpellcasterTypePriorityChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
+            <ChoiceBox fx:id="RaceProrityChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Set Attributes Priority:" GridPane.rowIndex="2" />
+            <Label text="Set Skills Priority:" GridPane.rowIndex="3" />
+            <Label text="Set Money Priority" GridPane.rowIndex="4" />
+            <ChoiceBox fx:id="AttributePriorityChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="SkillsPriorityChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ChoiceBox fx:id="MoneyPriorityChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="Set Name: (And hit enter!) " GridPane.rowIndex="6" />
+            <Label fx:id="SpellcasterTypePriorityLabel" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+            <Label fx:id="RaceProrityLabel" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label fx:id="AttributePriorityLabel" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label fx:id="SkillsPriorityLabel" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <Label fx:id="MoneyPriorityLabel" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Label text="Set Age: (And hit enter!) " GridPane.rowIndex="7" />
+            <Label text="Set Gender: (And hit enter!) " GridPane.rowIndex="8" />
+            <TextField fx:id="NameOfCharTextField" onAction="#onNameOfCharTextFieldAction" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="AgeOfCharTextField" onAction="#onAgeOfCharextFieldAction" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <ChoiceBox fx:id="GenderChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Label fx:id="NameOfCharLabel" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+            <Label fx:id="AgeOfCharLabel" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+            <Label fx:id="GenderOfCharLabel" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+         </children>
+      </GridPane>
+      <Button fx:id="NextButton" layoutX="434.0" layoutY="337.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="43.0" prefWidth="90.0" text="Next" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="38.0" />
+      <Button fx:id="ResetButton" layoutX="321.0" layoutY="337.0" mnemonicParsing="false" onAction="#onResetButtonAction" prefHeight="43.0" prefWidth="90.0" text="Reset" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="151.0" />
+      <Button layoutX="207.0" layoutY="337.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="90.0" text="Cancel" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="265.0" />
+      <Label fx:id="WarningLabel" layoutX="39.0" layoutY="350.0" text="You are not finished!" textFill="RED" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

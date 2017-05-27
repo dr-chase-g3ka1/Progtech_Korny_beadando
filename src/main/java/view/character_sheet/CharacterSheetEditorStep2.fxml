@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="411.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.character_sheet.CharacterSheetEditorStep2Controller">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Set Attributes" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <GridPane layoutX="23.0" layoutY="44.0" prefHeight="210.0" prefWidth="220.0" AnchorPane.bottomAnchor="157.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="319.0" AnchorPane.topAnchor="44.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="121.0" minWidth="10.0" prefWidth="88.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="31.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="31.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="37.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="35.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Body" />
+            <Label text="Agility" GridPane.rowIndex="1" />
+            <Label text="Strength" GridPane.rowIndex="2" />
+            <Label text="Charisma" GridPane.rowIndex="3" />
+            <Label text="Intelligence" GridPane.rowIndex="4" />
+            <Button fx:id="BodyAdderButton" mnemonicParsing="false" onAction="#onBodyAddButtonPressed" prefHeight="34.0" prefWidth="33.0" text="+" GridPane.columnIndex="1" />
+            <Button fx:id="BodyDividerButton" mnemonicParsing="false" onAction="#onBodyDivideButtonPressed" prefHeight="36.0" prefWidth="44.0" text="-" GridPane.columnIndex="2" />
+            <Button fx:id="AgilityAdderButton" mnemonicParsing="false" onAction="#onAgilityAddButtonPressed" prefHeight="31.0" prefWidth="37.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="AgilityDividerButton" mnemonicParsing="false" onAction="#onAgilityDivideButtonPressed" prefHeight="42.0" prefWidth="40.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="StrengthAdderButton" mnemonicParsing="false" onAction="#onStrengthAddButtonPressed" prefHeight="32.0" prefWidth="35.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="StrengthDividerButton" mnemonicParsing="false" onAction="#onStrengthDivideButtonPressed" prefHeight="36.0" prefWidth="36.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="CharismaAdderButton" mnemonicParsing="false" onAction="#onCharismaAddButtonPressed" prefHeight="32.0" prefWidth="39.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="CharismaDividerButton" mnemonicParsing="false" onAction="#onCharismaDivideButtonPressed" prefHeight="39.0" prefWidth="42.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="IntelligenceAdderButton" mnemonicParsing="false" onAction="#onIntelligenceAddButtonPressed" prefHeight="34.0" prefWidth="40.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="IntelligenceDividerButton" mnemonicParsing="false" onAction="#onIntelligenceDivideButtonPressed" prefHeight="39.0" prefWidth="44.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button fx:id="WillAdderButton" mnemonicParsing="false" onAction="#onWillAddButtonPressed" prefHeight="33.0" prefWidth="35.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="WillDividerButton" mnemonicParsing="false" onAction="#onWillDivideButtonPressed" prefHeight="37.0" prefWidth="41.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label text="Will" GridPane.rowIndex="5" />
+            <Label fx:id="BodyCalculatedLabel" text="Label" GridPane.columnIndex="4" />
+            <Label fx:id="AgilityCalculatedLabel" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Label fx:id="StrengthCalculatedLabel" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Label fx:id="CharismaCalculatedLabel" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <Label fx:id="IntelligenceCalculatedLabel" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Label fx:id="WillCalculatedLabel" prefHeight="17.0" prefWidth="28.0" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <Label fx:id="BodyBaseLabel" text="Label" textAlignment="CENTER" GridPane.columnIndex="3" />
+            <Label fx:id="AgilityBaseLabel" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="StrengthBaseLabel" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label fx:id="CharismaBaseLabel" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Label fx:id="IntelligenceBaseLabel" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Label fx:id="WillBaseLabel" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <Label text="Base" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <Label text="Calculated" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+         </children>
+      </GridPane>
+      <Label layoutX="105.0" layoutY="14.0" text="Distributable Attributes:" AnchorPane.topAnchor="14.0" />
+      <Label fx:id="DistributableAttributesLabel" layoutX="243.0" layoutY="14.0" text="X" />
+      <ButtonBar layoutX="93.0" layoutY="342.0" prefHeight="40.0" prefWidth="436.0" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="342.0">
+        <buttons>
+          <Button mnemonicParsing="false" text="Cancel" />
+            <Button mnemonicParsing="false" text="Reset" />
+            <Button mnemonicParsing="false" text="Back" />
+            <Button fx:id="NextButton" mnemonicParsing="false" onAction="#onNextButtonClicked" text="Next" />
+            <Button mnemonicParsing="false" text="Finalize" />
+        </buttons>
+      </ButtonBar>
+      <Label fx:id="WarningLabel" layoutX="23.0" layoutY="279.0" text="Label" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
