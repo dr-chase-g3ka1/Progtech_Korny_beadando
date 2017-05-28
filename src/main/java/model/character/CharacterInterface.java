@@ -12,8 +12,8 @@ import model.item.AbstractItem;
 import model.item.implant.CyberWare;
 
 /**
- *
- * @author Dr.Chase
+ * The Shadowrun character's abstract specification.
+ * @author Daradics Levente
  */
 public interface CharacterInterface {
     public TraditionTypeEnum getSpellcasterTradition();
