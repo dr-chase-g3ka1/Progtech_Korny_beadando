@@ -5,6 +5,8 @@
  */
 package shadowrunchargenproto_v0.pkg0;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.core.util.StatusPrinter;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.character.AbstractCharacter;
+import org.slf4j.Logger;
+
+import org.slf4j.LoggerFactory;
 import view.character_sheet.CharacterSheetEditorStep1Controller;
 import view.character_sheet.CharacterSheetEditorStep2Controller;
 import view.character_sheet.FirstMenuController;
@@ -28,6 +33,8 @@ public class LaunchFXApp extends Application {
     private BorderPane rootLayout;
     
     private AbstractCharacter character;
+    
+    private static final Logger logger = LoggerFactory.getLogger(LaunchFXApp.class);
     
     public void initRootLayout() {
         try {
@@ -117,6 +124,12 @@ public class LaunchFXApp extends Application {
     
     @Override
     public void start(Stage primaryStage) {
+        logger.debug("Starting Charactergenerator...");
+        
+        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+        StatusPrinter.print(lc);
+
+        
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("ShadowRun character manager app");
 
