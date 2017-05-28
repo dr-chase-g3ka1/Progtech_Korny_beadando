@@ -4,7 +4,7 @@
 
     <groupId>hu.unideb</groupId>
     <artifactId>ShadowrunV3Chargen</artifactId>
-    <version>0.9.0-rc</version>
+    <version>0.4.0-preview</version>
     <packaging>jar</packaging>
 
     <name>ShadowrunV3Chargen</name>
@@ -102,6 +102,44 @@
                     </additionalClasspathElements>
                 </configuration>
             </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-enforcer-plugin</artifactId>
+              <version>1.4.1</version>
+              <executions>
+                <execution>
+                  <id>enforce-versions</id>
+                  <goals>
+                    <goal>enforce</goal>
+                  </goals>
+                  <configuration>
+                    <rules>
+                      <bannedPlugins>
+                        <!-- will only display a warning but does not fail the build. -->
+                        <level>WARN</level>
+                        <excludes>
+                          <exclude>org.apache.maven.plugins:maven-verifier-plugin</exclude>
+                        </excludes>
+                        <message>Please consider using the maven-invoker-plugin (http://maven.apache.org/plugins/maven-invoker-plugin/)!</message>
+                      </bannedPlugins>
+                      <!--
+                      <requireMavenVersion>
+                        <version>2.0.6</version>
+                      </requireMavenVersion>
+                      -->
+                      <requireJavaVersion>
+                        <version>1.8</version>
+                      </requireJavaVersion>
+                      <!--
+                      <requireOS>
+                        <family>unix</family>
+                      </requireOS>
+                      -->
+                    </rules>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -110,6 +148,12 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <version>1.4.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
