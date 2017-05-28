@@ -50,12 +50,18 @@ import model.character.spellcaster.chartypes.Adept;
 import model.character.spellcaster.chartypes.SpecializedWizard;
 import model.character.spellcaster.chartypes.Wizard;
 
+//import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 /**
  * FXML Controller class
  *
  * @author Dr.Chase
  */
 public class CharacterSheetEditorStep1Controller {
+    
+    org.slf4j.Logger logger;
     
     private AbstractCharacter character;
     
@@ -155,7 +161,7 @@ public class CharacterSheetEditorStep1Controller {
     
     private void remainingPriosHelper(EnumSet<PriorityClassEnum> remainingPrios) {
         final List<PriorityClassEnum> possibleValues = new ArrayList<>(remainingPrios);
-        System.out.println(remainingPrios);
+        logger.info(remainingPrios.toString());
 
         final ObservableList<PriorityClassEnum> possibleValuesObservable = new ObservableListWrapper<>(
                 possibleValues);
@@ -166,7 +172,7 @@ public class CharacterSheetEditorStep1Controller {
     
     private void remainingPriosHelperSkillsAndMoney(EnumSet<PriorityClassEnum> remainingPrios) {
         final List<PriorityClassEnum> possibleValues = new ArrayList<>(remainingPrios);
-        System.out.println(remainingPrios);
+        logger.info(remainingPrios.toString());
 
         final ObservableList<PriorityClassEnum> possibleValuesObservable = new ObservableListWrapper<>(
                 possibleValues);
@@ -176,7 +182,7 @@ public class CharacterSheetEditorStep1Controller {
     
     private void remainingPriosHelperMoney(EnumSet<PriorityClassEnum> remainingPrios) {
         final List<PriorityClassEnum> possibleValues = new ArrayList<>(remainingPrios);
-        System.out.println(remainingPrios);
+        logger.info(remainingPrios.toString());
 
         final ObservableList<PriorityClassEnum> possibleValuesObservable = new ObservableListWrapper<>(
                 possibleValues);
@@ -481,23 +487,27 @@ public class CharacterSheetEditorStep1Controller {
         //**********************************************************************
         //              MUST LOG HERE
         //**********************************************************************
-        System.out.println("*************************************************");
-        System.out.println("\t\tSaving datas");
-        System.out.println("*************************************************");
+//        System.out.println("*************************************************");
+//        System.out.println("\t\tSaving datas");
+//        System.out.println("*************************************************");
+//        
+//        System.out.println("Attributes prio:" + character.getPrioAttributes());
+//        System.out.println("Magic prio:" +character.getPrioMagic());
+//        System.out.println("Race prio:" +character.getPrioRace());
+//        System.out.println("Resource prio:" +character.getPrioResources());
+//        System.out.println("Skills prio:" +character.getPrioSkills());
         
-        System.out.println("Attributes prio:" + character.getPrioAttributes());
-        System.out.println("Magic prio:" +character.getPrioMagic());
-        System.out.println("Race prio:" +character.getPrioRace());
-        System.out.println("Resource prio:" +character.getPrioResources());
-        System.out.println("Skills prio:" +character.getPrioSkills());
+        logger.info("Saving datas");
+        logger.info("Attributes prio:" + character.getPrioAttributes().toString());
+        logger.info("Magic prio:" +character.getPrioMagic().toString());
+        logger.info("Race prio:" +character.getPrioRace().toString());
+        logger.info("Resource prio:" +character.getPrioResources().toString());
+        logger.info("Skills prio:" +character.getPrioSkills().toString());
         
     }
     
     @FXML
     void onNextButtonClicked(ActionEvent event) throws IOException  {
-
-        
-        
         if(checkInputValues())    {
             setCharacterValuesFromInput();
             //characterSheetEditorStep2Controller.setMyCharacter(character);
@@ -509,7 +519,6 @@ public class CharacterSheetEditorStep1Controller {
             WarningLabel.setText("You Are Not Finished!");
             WarningLabel.setVisible(true);
         }
-        
     }
     
     @FXML
@@ -520,35 +529,24 @@ public class CharacterSheetEditorStep1Controller {
     private void onAgeOfCharextFieldAction()  {
         AgeOfCharLabel.setText(AgeOfCharTextField.getText());
     }
-    
 
     public void initialize() {
+        
+        logger = LoggerFactory.getLogger(CharacterSheetEditorStep1Controller.class);
+        logger.info("Initializing CharacterSheetEditorStep1Controller...");
         resetLabels();
-        //character = new Character();
+
         resetPrios();
         // Log here later
-        
-        // Log here better
-        System.out.println(SpellcasterTypePriorityChoiceBox.getValue());
-        
-        /*
-        SpellcasterTypePriorityChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
-            new ChangeListener<Number>()    {
-                public void changed(ObservableValue ov, Number value, Number new_value) {
-                    SpellcasterTypePriorityLabel.setText(new_value.toString());
-                }
-            }
-        );
-        */
-        //SpellcasterTypePriorityChoiceBox.getItems().addAll("Non-Spellcaster", "Wizard", "Adept", "Specialized Wizard");
+
         SpellcasterTypePriorityChoiceBox.getItems().setAll(model.character.SpellcasterTypeEnum.values());
         
         SpellcasterTypePriorityChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
                 (observableValue, value, newValue) -> {
                     // LOGGING HERE
                     // ez itt jelenleg azt loggolja hogy MIRŐL váltunk
-                    System.out.println(SpellcasterTypePriorityChoiceBox.getSelectionModel().selectedItemProperty());
-                    System.out.println(SpellcasterTypePriorityChoiceBox.getValue());
+                    logger.info(SpellcasterTypePriorityChoiceBox.getSelectionModel().selectedItemProperty().toString());
+                    //logger.info(SpellcasterTypePriorityChoiceBox.getValue().toString());
                     
                     switch(newValue.intValue()) {
                         case 0: /*non-spellcaster*/   
@@ -583,11 +581,10 @@ public class CharacterSheetEditorStep1Controller {
                             remainingPrios.add(PriorityClassEnum.PRIORITY_C);
                             break;
                     }
-                    System.out.println(remainingPrios);
+                    logger.info(remainingPrios.toString());
                     // This line updates 3 choiceboxes with reamining priorities
                     remainingPriosHelper(remainingPrios);
                 }
-                
         );
         
         // Race selection
@@ -597,8 +594,7 @@ public class CharacterSheetEditorStep1Controller {
                 (observableValue, value, newValue) -> {
                     // LOGGING HERE
                     // ez itt jelenleg azt loggolja hogy MIRŐL váltunk
-                    System.out.println(RaceProrityChoiceBox.getSelectionModel().selectedItemProperty());
-                    System.out.println(RaceProrityChoiceBox.getValue());
+                    logger.info(RaceProrityChoiceBox.getSelectionModel().selectedItemProperty().toString());
                     
                     switch(newValue.intValue()) {
                         case 0: /*human*/   
@@ -655,22 +651,12 @@ public class CharacterSheetEditorStep1Controller {
                             remainingPrios.add(PriorityClassEnum.PRIORITY_D);
                             break;
                     }
-                    System.out.println(remainingPrios);
+                    logger.info("Remaining prios:");
+                    logger.info(remainingPrios.toString());
                     remainingPriosHelper(remainingPrios);
                 }
         );
-        
-        // Attributes selection
-        //AttributePriorityChoiceBox.getItems().setAll(model.character.PriorityClassEnum.values());
-        
-//        List<PriorityClassEnum> possibleAttrValues = new ArrayList<>(remainingPrios);
-//        System.out.println("Remaining prios: " + remainingPrios);
-//        System.out.println("Possible attributes: " + possibleAttrValues);
-//
-//        final ObservableList<PriorityClassEnum> possibleAttrValuesObservable = new ObservableListWrapper<>(
-//                possibleAttrValues);
-//        AttributePriorityChoiceBox.setItems(possibleAttrValuesObservable);
-//        
+
         remainingPriosHelper(remainingPrios);
         AttributePriorityChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
@@ -680,9 +666,10 @@ public class CharacterSheetEditorStep1Controller {
                     
                     // LOGGING HERE
                     // ez itt jelenleg azt loggolja hogy MIRŐL váltunk
-                    System.out.println("Possible Attr values:");
-                    System.out.println(possibleAttrValues);
-                    System.out.println("Setting text label.");
+                    logger.info("Possible Attr values:");
+                    logger.info(possibleAttrValues.toString());
+                    logger.info("Setting text label.");
+
                     try {
                         switch(newValue.intValue()) {
                             case -1:
@@ -692,8 +679,6 @@ public class CharacterSheetEditorStep1Controller {
                                 //AttributePriorityLabel.setText(prioClassTemp.toString());
                                 AttributePriorityLabel.setText(niceTextForPriorityLabel(possibleAttrValues.get(newValue.intValue()).toString()));
                                 remainingPrios.remove(possibleAttrValues.get(newValue.intValue()));
-
-                                //System.out.println(AttributePriorityChoiceBox.getValue().toString());
                                 break;
                             case 1:   
                                 AttributePriorityLabel.setText(niceTextForPriorityLabel(possibleAttrValues.get(newValue.intValue()).toString()));
@@ -717,11 +702,12 @@ public class CharacterSheetEditorStep1Controller {
                     }
                     catch(IndexOutOfBoundsException e)  {
                         AttributePriorityLabel.setText("");
-                        System.out.println("Exception caught: ");
-                        System.out.println("While trying to set new attr label or remove from remaining prios.");
+                        logger.error("Exception caught: ");
+                        logger.error("While trying to set new attr label or remove from remaining prios.");
+
                         //remainingPriosHelperSkillsAndMoney(remainingPrios);
                     }
-                    System.out.println("removing from remaining prios at attributes.");
+                    logger.info("removing from remaining prios at attributes.");
                     try {
                         switch(oldValue.intValue()) {
                             case -1:
@@ -749,44 +735,27 @@ public class CharacterSheetEditorStep1Controller {
                     }
                     catch(IndexOutOfBoundsException e)  {
                         AttributePriorityLabel.setText("");
-                        System.out.println("Exception caught: ");
-                        System.out.println("While add back to remainingPrios varaible at AttributeChoicebox.");
+                        logger.error("Exception caught: ");
+                        logger.error("While add back to remainingPrios varaible at AttributeChoicebox.");
                         remainingPrios.add((PriorityClassEnum)AttributePriorityChoiceBox.getValue());
                         //remainingPriosHelperSkillsAndMoney(remainingPrios);
                     }
-                    
-                    
-                    
-                    
-//                    if(possibleAttrValues.get(newValue.intValue()) != null || oldValue.intValue() != -1 )   {
-//                        remainingPrios.add(possibleAttrValues.get(oldValue.intValue()));
-//                    }
-                    
-                    System.out.println("Attribute prio choosen. Remaining prios:");
-                    System.out.println(remainingPrios);
-                    //System.out.println(possibleAttrValues.get(newValue.intValue()).toString());
-                    //System.out.println(possibleAttrValues.get(newValue.intValue()).getClass().getName());
-                    // ez működik, de mindig az előző prioritást adja vissza
-                    System.out.println(AttributePriorityChoiceBox.getValue());
-                    //System.out.println(AttributePriorityChoiceBox.getSelectionModel().getSelectedItem().toString());
-                    //System.out.println(AttributePriorityChoiceBox.getSelectionModel().getSelectedItem().getClass().getName());
+                    logger.info("Attribute prio choosen. Remaining prios:");
+                    logger.info(remainingPrios.toString());
                     remainingPriosHelperSkillsAndMoney(remainingPrios);
-                    
                 }
-                
         );
         
         remainingPriosHelperSkillsAndMoney(remainingPrios);
         SkillsPriorityChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
                     List<PriorityClassEnum> possibleSkillValues = SkillsPriorityChoiceBox.getItems();
-
                     
                     // LOGGING HERE
                     // ez itt jelenleg azt loggolja hogy MIRŐL váltunk
-                    System.out.println("Possible Skill values:");
-                    System.out.println(possibleSkillValues);
-                    System.out.println("Setting text label for skill points.");
+                    logger.info("Possible Skill values:");
+                    logger.info(possibleSkillValues.toString());
+                    logger.info("Setting text label for skill points.");
                     try {
                         switch(newValue.intValue()) {
                             case -1:
@@ -820,8 +789,8 @@ public class CharacterSheetEditorStep1Controller {
                     }
                     catch(IndexOutOfBoundsException e)  {
                         SkillsPriorityLabel.setText("");
-                        System.out.println("Exception caught: ");
-                        System.out.println("While trying to set new skill label or remove from remaining prios.");
+                        logger.error("Exception caught: ");
+                        logger.error("While trying to set new skill label or remove from remaining prios.");
                         //remainingPriosHelperSkillsAndMoney(remainingPrios);
                     }
                     finally {
@@ -849,36 +818,31 @@ public class CharacterSheetEditorStep1Controller {
                                 break;
                             default:
                         }
-                        
                     }
                     catch(IndexOutOfBoundsException e)  {
                         SkillsPriorityLabel.setText("");
-                        System.out.println("Exception caught: ");
-                        System.out.println("While add back to remainingPrios varaible at SkillChoiceBox.");
+                        logger.error("Exception caught: ");
+                        logger.error("While add back to remainingPrios varaible at SkillChoiceBox.");        
                         remainingPrios.add((PriorityClassEnum)SkillsPriorityChoiceBox.getValue());
                         //remainingPriosHelperSkillsAndMoney(remainingPrios);
                     }
                     finally {
                         
                     }
-                        
-                    System.out.println("Attribute skill choosen. Remaining prios:");
-                    System.out.println(remainingPrios);
+                    logger.info("Attribute skill choosen. Remaining prios:");
+                    logger.info(remainingPrios.toString());
                     remainingPriosHelperMoney(remainingPrios);
                 }
         );
         
-        
         MoneyPriorityChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
                     List<PriorityClassEnum> possibleMoneyValues = MoneyPriorityChoiceBox.getItems();
-
-                    
                     // LOGGING HERE
                     // ez itt jelenleg azt loggolja hogy MIRŐL váltunk
-                    System.out.println("Possible Skill values:");
-                    System.out.println(possibleMoneyValues);
-                    System.out.println("Setting text label for money.");
+                    logger.info("Possible Skill values:");
+                    logger.info(possibleMoneyValues.toString());
+                    logger.info("Setting text label for money.");
                     try {
                         switch(newValue.intValue()) {
                             case -1:
@@ -912,8 +876,8 @@ public class CharacterSheetEditorStep1Controller {
                     }
                     catch(IndexOutOfBoundsException e)  {
                         MoneyPriorityLabel.setText("");
-                        System.out.println("Exception caught: ");
-                        System.out.println("While trying to set new money label or remove from remaining prios.");
+                        logger.error("Exception caught: ");
+                        logger.error("While trying to set new money label or remove from remaining prios.");
                         //remainingPriosHelperSkillsAndMoney(remainingPrios);
                     }
                     finally {
@@ -941,22 +905,19 @@ public class CharacterSheetEditorStep1Controller {
                                 break;
                             default:
                         }
-                        
                     }
                     catch(IndexOutOfBoundsException e)  {
                         SkillsPriorityLabel.setText("");
-                        System.out.println("Exception caught: ");
-                        System.out.println("While add back to remainingPrios varaible at SkillChoiceBox.");
+                        logger.error("Exception caught: ");
+                        logger.error("While add back to remainingPrios varaible at SkillChoiceBox.");
                         remainingPrios.add((PriorityClassEnum)SkillsPriorityChoiceBox.getValue());
                         //remainingPriosHelperSkillsAndMoney(remainingPrios);
                     }
                     finally {
                         
                     }
-                        
-                    System.out.println("Attribute skill choosen. Remaining prios:");
-                    System.out.println(remainingPrios);
-
+                    logger.info("Attribute skill choosen. Remaining prios:");
+                    logger.info(remainingPrios.toString());
                 }
         );
         
@@ -972,21 +933,13 @@ public class CharacterSheetEditorStep1Controller {
                         case 1:   
                             GenderOfCharLabel.setText("Female");
                             break;
-                        
                     }
                 }
         );
 
-    }    
-    
-    
-    
-    
-    
-
+    }
     public void setMainApp(LaunchFXApp mainApp) {
         this.mainApp = mainApp;
-
     }
     
     // Setters and Getters after this line
@@ -997,6 +950,4 @@ public class CharacterSheetEditorStep1Controller {
     public void setCharacter(AbstractCharacter character) {
         this.character = character;
     }
-    
-    
 }

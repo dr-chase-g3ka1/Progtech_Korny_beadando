@@ -124,7 +124,7 @@ public class LaunchFXApp extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        logger.debug("Starting Charactergenerator...");
+        logger.info("Starting Charactergenerator...");
         
         LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
         StatusPrinter.print(lc);

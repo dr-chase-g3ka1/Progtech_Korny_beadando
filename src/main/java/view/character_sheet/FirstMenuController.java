@@ -5,7 +5,7 @@
  */
 package view.character_sheet;
 
-import controller.xml.savecharacter.XMLLoader;
+import controller.xml.XMLLoader;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +18,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import model.character.AbstractCharacter;
 import shadowrunchargenproto_v0.pkg0.LaunchFXApp;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * FXML Controller class
@@ -46,6 +50,9 @@ public class FirstMenuController {
         this.mainApp = mainApp;
     }
     
+    Logger logger;
+
+    
     @FXML
     private Button CreateNewButton;
     
@@ -62,6 +69,7 @@ public class FirstMenuController {
     private void showCharacterSheetEditorStep1() {
         try {
             // Load person overview.
+            logger.info("Opening character creator screen...");
             FXMLLoader loader1 = new FXMLLoader();
             loader1.setLocation(getClass().getResource("/fxml/CharacterSheetEditorStep1.fxml"));
             AnchorPane characterSheetEditorStep1 = (AnchorPane) loader1.load();
@@ -108,12 +116,15 @@ public class FirstMenuController {
         if (file != null) {
             CharacterTransferHelper.transferCharacter = XMLLoader.loadXMLFromFileAndPrint(file);
             showCharacterSheetEditorStep3(CharacterTransferHelper.transferCharacter);
+            logger.info("{} loaded successfully", file.toString());
         }
         
         
     }
     
     public void initialize() {
+        logger = LoggerFactory.getLogger(FirstMenuController.class);
+        logger.info("Loading first screen...");
         // TODO
     }    
     

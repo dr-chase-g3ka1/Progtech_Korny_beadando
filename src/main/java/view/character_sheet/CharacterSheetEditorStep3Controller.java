@@ -5,7 +5,7 @@
  */
 package view.character_sheet;
 
-import controller.xml.savecharacter.XMLSaver;
+import controller.xml.XMLSaver;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;

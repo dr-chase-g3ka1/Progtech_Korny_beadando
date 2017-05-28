@@ -20,6 +20,9 @@ import model.character.AbstractCharacter;
 import controller.character.helpers.StartingAttributesHelper;
 import shadowrunchargenproto_v0.pkg0.LaunchFXApp;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * FXML Controller class
  *
@@ -64,6 +67,7 @@ public class CharacterSheetEditorStep2Controller {
         return mainApp;
     }
     
+    Logger logger;
     
     @FXML
     private Button BodyAdderButton;
@@ -161,10 +165,11 @@ public class CharacterSheetEditorStep2Controller {
             nTempFromDistributable--;
             baseLabel.setText(nTempFromTF.toString());
             DistributableAttributesLabel.setText(nTempFromDistributable.toString());
+            logger.info("+1 added to a label");
         }
     }
     
-    private void GeneralDividerFunction( Label baseLabel) {
+    private void GeneralSubstractFunction( Label baseLabel) {
         if(    Integer.parseUnsignedInt(baseLabel.getText()) > 0 && 
                Integer.parseUnsignedInt(DistributableAttributesLabel.getText()) < nMaxAttributesOfChar //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
            )   
@@ -175,6 +180,7 @@ public class CharacterSheetEditorStep2Controller {
             nTempFromDistributable++;
             baseLabel.setText(nTempFromTF.toString());
             DistributableAttributesLabel.setText(nTempFromDistributable.toString());
+            logger.info("-1 substracted from a label");
         }
     }
     
@@ -210,32 +216,32 @@ public class CharacterSheetEditorStep2Controller {
     ////////////////////////////////////
     @FXML
     private void onBodyDivideButtonPressed()   {
-        GeneralDividerFunction(BodyBaseLabel);
+        GeneralSubstractFunction(BodyBaseLabel);
     }
     
     @FXML
     private void onAgilityDivideButtonPressed()   {
-        GeneralDividerFunction(AgilityBaseLabel);
+        GeneralSubstractFunction(AgilityBaseLabel);
     }
     
     @FXML
     private void onStrengthDivideButtonPressed()   {
-        GeneralDividerFunction(StrengthBaseLabel);
+        GeneralSubstractFunction(StrengthBaseLabel);
     }
     
     @FXML
     private void onCharismaDivideButtonPressed()   {
-        GeneralDividerFunction(CharismaBaseLabel);
+        GeneralSubstractFunction(CharismaBaseLabel);
     }
     
     @FXML
     private void onIntelligenceDivideButtonPressed()   {
-        GeneralDividerFunction(IntelligenceBaseLabel);
+        GeneralSubstractFunction(IntelligenceBaseLabel);
     }
     
     @FXML
     private void onWillDivideButtonPressed()   {
-        GeneralDividerFunction(WillBaseLabel);
+        GeneralSubstractFunction(WillBaseLabel);
     }
     
     private boolean checkBeforeNextButton()    {
@@ -324,6 +330,8 @@ public class CharacterSheetEditorStep2Controller {
 
     
     public void initialize() {
+        logger = LoggerFactory.getLogger(CharacterSheetEditorStep2Controller.class);
+
         character = CharacterTransferHelper.transferCharacter;
         InitializeMaxAttrs ();
         InitializeBaseLabels();
