@@ -1,0 +1,364 @@
+karakter:
+	lényeges tulajdonság: //könyv 40.oldal
+
+		Nem : férfi or nõ
+		Faj : humán, tünde, törpe, ork, troll
+			Képesség módosítók:
+				Humán: 1-6 mind (alap)
+				
+		Fizikai tulajdonságok:
+			Test: 			életerõ, ellenállás betegséggel vagy drogokkal stb...
+			Gyorsaság:	
+			Erõ:			amit az izmaival tenni tud
+			Karizma:		vezetõi képesség, "szépség" + test beszéd, megállapítja mit tud elérni egyes embereknél
+			Intelligencia:	memória, felfogó-elemzõ képesség, alacsony esetén nem feltétlen buta hanem meggondolatlan + ösztönös
+			Akaraterõ:		magas érték esetén "soha ne add fel" hozzáállás, vezetõi képesség
+			
+					// Van természetes és módosítot tulajdonság. Pl kiberver vagy mágia módosíthatja
+					// alap emberi: 1-6
+					// Erre jönnek rá Faji módosítók. Így vannak faji maximum táblázatok. Ezek természetesek.
+					// Erre jönnek rá a kiberverek és mágiák általi módosítók.
+					//! Karma elköltésével lehet növelni ezeket a szinteket. (244.oldal)
+			
+		Különleges tulajdonságok:
+			Esszencia:		!Lehet nem egész szám is: pl 4,5
+							életerõ, test egészségének fokmérõje. A sok chipek implant és a drogok csökkentik pl.
+							Kezdeti szint = 6; kiberverek, és rosszul begyógyult sebek csökkenthetik. 6 felett nem lehet (jól tesztelhetõ)
+							Ha nullára vagy az alá csökken, a karakter meghal.
+			Mágia:			mana + test kapcsolata, ha mágia használatára képes karakter, akkor kezdeti mágia szintje 6, de maximum az Esszencia tulajdonságának szintje 
+							pl: Esszencia: 4,5 eseteén a Mágia = 4
+			Reakció:		= lefelé_kerekítve(átlag(gyorsaság + intelligencia))
+			
+					
+			
+		Kezdeményezés:		
+							Ez dönti el hogy HARCban a karakterek milyen sorrendben cselekedhetnek.
+							Dobni kell kockákkal (1d6) <- ennyi az alap, de lehet több is módosítók miatt és ehhez hozzáadjuk a Reakciót
+							!NINCS HATOSSZABÁLY mert nem próba
+							Hatoldalú kockával kezd minden karakter (1d6), de mágia vagy kiberver módosíthatja és kockákat adhat hozzá (2d6) vagy (3d6).
+							MÁtrixban: 		a dekás Reakcióját és kezdeményezését csak a karakter által használt kiberdekk reakciónövelése módosíthatja.
+											ezt csak a sebesülési módosítók módosíthatják
+							Rigózás:   		(jármûvek és robotok, 130.oldal) a használt jármûirányítáó rendszerükbõl adódó módosítókat kell figyelembe venni.
+											ha van adatjack-je a karakternek + a jármûnek vagy robotnak is akkor +1 vezetés közben
+											erre csak a sebesülési módosítók jöhetnek rá
+							Asztráltérben:	a varázsló alap Reakciója = Intelligencia 
+											Asztrálisan projektáló karakterek 1D6 kezdeményezés kockát + 20 kezdeményezés bónuszt kapnak
+											erre csak a sebesülési módosítók jöhetnek rá
+											
+		Mágia:				todo
+		
+		Szakértelmek:		ismeretek és tanult képesség összessége. Problémamegoldásra használjuk.
+							Aktív szakértelem pl: "fegyvertelen harc"; Ismeret szakértelem pl: "Biológia"
+							kezdõ karakter szakértelme 1-6 os értékkel,
+							Specializáció: 	alapszakértelem egy kisebb területre való leszûkítést jelenti. 
+											pl: "pisztolyok szakértelem" -> specializálódik "Remington Roomsweeper"-re
+											ilyenkor jobban ért ahhoz a bizonyos típusú eszközhöz, de a többihez kevésbé
+											nem kötelezõ
+											kezdõ karakter specializációi nem mehetnek 7 fölé
+							(É/J) = építés javítás (intelligencia)
+										
+		Kockatartalékok:	élet-halál helyzetekben érdemes alkalmazni
+							hozzáadható a próbákhoz mint +1 kocka
+							ezek általában szakértelmekbõl és tulajdonságokból származnak
+							pl: rigó tartalék a JIR által módosított Reakció szinttel, és minden rigózással kapcsolatos próbához felhasználható
+							fajták:
+								mágikus tartalék
+								harci tartalék
+								asztrális tartalék
+								dekás tartalék
+							a harci forduló elsõ pillanatában elérhetõ, és ha kiürül akkor a következõ forduló elején frissül, ekkor használható újra
+							egyszerre többet is lehet használni
+							pl: ha a karakter egy próbához 4 kockával dobna, de hogy biztosra menjen hozzátesz még 3 kockát akkor összesen 7 kockával dob
+							minden kör elején maxra töltõdik
+							van Karma tartalék más szabályokkal
+		
+			Harci tartalék:		támadó vagy védekezõ, harchoz kapcsolódó próbákhoz lehet felhasználni. pl harci szakértelem használásakor
+								felhasználható kitérésre vagy mások által okozott sérülések ellenpróbájára is (113. oldal)
+								= (Gyorsaság + Intelligencia + Akaraterõ) / 2
+								^^^^ ezek módosítói (mágia, kiberver) módosítják a harci tartalékot is
+								úgy töltõdik mint a sima kockatartalékok: harc közben az elsõ körben maxra megy fel
+								a karakter legfeljebblegfeljebb annyi kockát használhat fel harci tartalékból, ahányadik szinten ismeri az adott szakértelmet
+								pl: ha a Pisztolyok szakértelme ötös akkor legfeljebb 5 kockát használhat fel, ha Pisztolyok szakértelem próbára kerül sor
+								kitérés és sérülés ellenpróba esetén nincs korlátozás
+								mágia: csak elemi manipulációk esetén lehet használni
+								kitérés (109., 123. oldal)
+								Nehéz Páncél esetén:
+										a harci tartalék annyival csökken ahányszor 2 ponttal a páncél ballisztikus vagy ütési páncélzat szintje meghaladja a karakter gyorsaaságát
+								Asztrális Harci tartalék:
+										csak asztrálsíkon használható:
+										= (Intelligencia + Akaraterõ + Karizma) / 2 // lefelé kerekítve
+										
+			Rigó tartalék:		rigók használhatják a jármûirányító rendszerrel felszerelt gépekkel kapcsolatos próbáikhoz pl manõver próba	 illetve azok ellenpróbáihoz
+								= Reakció + (JIR) kibervere módosítói
+								rendes kockatartalék szabályok szerint frissül
+								legfeljebb annyi kocka használható ahányadik szinten az adott szakértelmet ismeri
+								csak (JIR) kármû irányító rendszerrel
+			
+			Dekás Tartalék		= intelligencia + a dekk PIMP szintje
+								A mátrixban szinte minden próbához
+								kivéve:
+									szürke vagy fekete jég esetén a Test és Akaraterõ próbákra
+									etikett (Mátrix) próbákhoz
+									
+			Varázslat Tartalék	= (Intelligencia + Akaraterõ + Mágia) / 3 lefelé kerekítve
+								max annyit használhat fel amennyi az illetõ próbához normálisan tartalék nélkül felhasznált kockák száma
+								kimerülés ellen nincs korlátozás
+		
+		Felszerelés:		A kezdõ karakter csak a karaktergeneráláskor felhasználható pénzbõl vásárolhat.
+							Késõbb már a játék során megszerzett pénzbõl kell.
+							szint: 			mennyire fejlett
+							elérhetõség:	mennyire könnyen és gyorsan beszerezhetõ
+							utcai index:	a tárgy árának a szorzója, ha fekete piacon veszi
+							súly:			teherbírás miatt
+							elrejthetõség:	a tárgy észrevételéhez szükséges, Észlelés próba célszámaként funkcionál
+					Fegyverekre:
+							sebzés kódja: 	számból és betûbõl áll
+											Az elején lévõ szám az energiaszint: mennyir enehéz ellenállni a fegyver energiájának
+											A betû pedig a sebzésszint, ami a fegyver által okozott sebzés mértéke:
+											(enyhze, Közepes, Súlyos, Halálos)
+		
+			Kiberver:		beültetés
+							növelheti a karakter tulajdonságait és szakértelmeit
+							némelyik különleges dolgok elvégzésére alkalmas:
+								pl: MÁtrixban való szörfözésre, Jármû irányító rendszerrel jármûvek gondolati úton való irányítására, (huzalozott reflex) vagy a normális sebesség 3szorosával történõ mozgásra
+							Esszenciát csökkenti.
+							Némelyik illegális.
+							Van Alfaver, ami fejlettebb, kevesebb esszenciát von le de sokkal drágább.
+		
+		Kapcsolatok:		most még nem fontos
+		
+		Életvitel:			lehet több is, havonta levonja a pénzt egy életvitel.
+		
+		Állapotjelzõ:
+		
+		Karma:				tapasztalat,
+							van jó karma és karma tartalék
+							A jó karmával tulajdonságokat és szakértelmeket vásárolhat
+							a tartalék karmával próbákat erõsíthet
+							
+		Életrajz:			A karakter története.
+		
+
+Karaktergenerálás:
+		
+		Fontossági rendszer:		
+							Minden kategóriához egy fontossági szintet kell rendelni.
+							Ezek a szintek A - E ig betûk ahol A a legfontosabb és E a legkevésbé fontos.
+							A kategóriák pedig:
+									-Faj				
+									-Mágia				milyen szinten ismeri a mágiát
+									-Tulajdonságok		hány tulajdonság pontot tud szétosztani
+									-Szakértelmek		hány szakértelem pontot tud kiosztani
+									-Erõforrások		mennyi pénzzel kezd
+							Táblázat:
+							Fontosság		Faj				Mágia					Tulajdonságok			Szakértelmek			Erõforrások
+							----------------------------------------------------------------------------------------------------------------
+							A				-			   Varázsló						30						50					1.000.000 (pénz)
+							B				-			   Adeptus						27						40					  400.000				
+							C			Troll/Tünde	Specializált Varázsló				24						34					   90.000							
+							D			Törpe/Ork			  -							21						30					   20.000			
+							E			  Humán				  -							18						27					    5.000			
+							
+							
+							1.
+								Tehát érdemes elõbb azt eldönteni, hogy akarsz-e mágikus képességekkel rendelkezni. Mert akkor a megfelelõ mágia típushoz a 
+								megfelelõ fontossági szintet egybõl hozzá kell rendelned. Ha nem akarsz mágus lenni, akkor Mágia = E
+							2. 
+								A faj!
+								Ahhoz is a megfelelõ fontosságot kell elõször hozzárendelni. Kivéve ha sima ember akarsz lenni mert akkor ez lehet E.
+							
+		Teljes Értékû Varázslók:
+							Képesek varázsolni (Varázslás), szellemeket idézni (Idézés), mágikus fókuszokat használni, asztrálisan érzékelni és projektálni.
+							160. oldal
+							Kezdéskor 25 varázsponttal rendelkeznek ebbõl vásárolhatnak varázslatokat. Ahányas a varázslat szintje, annyi pontot kell rá elkölteni.
+							Karma helyett a Varázspontokat is elkölthetik 1pont/fókusz áron.
+							Késõbb már csak Karma felhasználásával lehet varázslatokat tanulniuk és fókuszokat megkötniük.
+							Karaktergeneráláskor lehet vásárolni 25.000/pont értékben Varázspontokat.
+							Varázspontokon lehet idézett szellemeket és szolgáltatásaikat is vásárolni. Ahányas erejû a szellem, annyi pontot kell rákölteni. 
+							pl: 4-es erejû légelementállal szeretne kezdeni, melytõl 4 szolgáltatást kérhet, akkor a szellem 4 pontba fog kerülni, a szolgálatok pedig 8 pontba, összesen 12-be.
+							Idézés 184. oldal.
+							A kezdõ varázslónak egyik varázslatuk, fókuszuk vagy szellemük sem lehet 6-os erejûnél nagyobb.
+							Továbbá nem lehet hatnál több szellemük, és egyik szellemtõl sem kérhetnek hat szolgálatnál többet.
+							Sámáni vagy Hermetikus tradíciót követik?
+							
+		Specializált varázslók: 160.oldal
+							Tradíciójuk egy bizonyos elemére szûkítették tanulmányaikat.
+							Korlátozott mértékben képesek varázsolni (Varázslás), szellemeket idézni (Idézés), mágikus fókuszokat használni.
+							Asztrálisan érzékelni tudnak, de projektálni nem.
+							35 varázspontot kap kezdéskor, 25.000/pont értékben vásárolhat (max 50 ig). Csak karaktergeneráláskor vásárolhat Varázspontot.
+							Varázspontokból megköthetnek fókuszokat is, illetve szellemeket is idézhetnek, de késõbb csak Kkrmából.
+							A kezdõ varázslónak egyik varázslatuk, fókuszuk vagy szellemük sem lehet 6-os erejûnél nagyobb.
+							Továbbá nem lehet hatnál több szellemük, és egyik szellemtõl sem kérhetnek hat szolgálatnál többet.
+							Sámáni vagy Hermetikus tradíciót követik?
+							
+		Adeptusok:					
+							Nem varázsol, nem idéz, és nem érzékeli az Aztrál síkot (kivéve ha rendelkezik az Asztrális érzékelés képességével).
+							Képességpontokkal vásárolhat fizikai és mentális képességeket. A Mágia tulajdonságokkal megegyezõ képességpontot kap.
+							Nem tud további képességpontot vásárolni pénzért.
+							Nincs Varázspontja. A test útját követik (168.oldal). Tudnak fegyver fókuszt (190.oldal), de csak akkor köthetik meg ha már megfelelõ mennyiségû karmával rendelkeznek.
+							
+							Mágus vs Sámán:
+								A sámánnak totemet kell választania.
+							
+		Tulajdonságok kiválasztása:
+							Test, Gyorsaság, Erõ, Intelligencia, Akraterõ és Karizma.
+							Ezekre lehet szétosztani a tulajdonság pontokat, ami a fontosságtól függ. Mind egynél nagyobb, de hatnál kisebb.
+							Esszencia, Mágia, Reakció - ezek egyéb tényezõktõl függenek.
+							A karakter faja is módosítja a tulajdonságait. A máximális értéket is felemeli, a módosítók hozzáadása után. 1nél viszont nem lehet kevesebb módosítók után sem.
+							
+							Faji módosítók
+							-------------------------------------------------------------------------------------------------------------------------------------------------------
+							Törpe	|	+1 Test; +2 Erõ +1 Akaraterõ, Hõlátás, Ellenállás (+2 Test mindenfajta betegséggel és méreggel szemben)
+							Tünde	|	+1 Gyorsaság +2 Karizma, Éjszakai Látás
+							Ork		|	+3 Test, +2 Erõ, -1 Karizma, -1 Intelligencia, Éjszakai Látás
+							Troll	|	+5 Test, -1 Gyorsaság, +4 Erõ, -2 Intelligencia, -2 Karizma, Hõlátás, +1 Elérés Fegyveres/Fegyvertelen harcban, Bõrpáncélzat (+1 Test)
+							-------------------------------------------------------------------------------------------------------------------------------------------------------
+							
+							Esszencia:
+								Minden karakter 6os esszenciával indul. Kibernetikus beültetésekkel csökkenhet. Nem lehet nulla. Ha az érték nulla akkor a karakter halott.
+							
+							Mágia:
+								Ez lehet nulla is.
+								Ha a Mágia mellé nem az E fontossági szintet rendelted, akkor a karaktered Mágia értéke a lefelé kerekített Esszenciával egyenlõ.
+							
+							Reakció:
+								(Gyorsaság + intelligencia) / 2
+							
+		Szakértelmek Kiválasztása:
+							Fontosság alapján kapsz pontokat amiket elkölthetsz.
+							3 fajtája van:
+							Aktív szakértelmek:
+								Olyan szakértelem, ami egy cselekedettel jár.
+							Ismeret szakértelmek:
+								
+							Nyelvi Szakértelmek:
+							
+							Minél több szakértelem pontot adsz egy szakértelemre annál több kockával dobhatsz.
+							Minden szakértelem pontot külön kell megvásárolni. A hozzájuk rendelt tulajdonságok értékétõl függhet.
+							A kapcsolt tulajdonság értékével megegyezõ vagy annál kisebb szakértelem szint esetén 1 Szakértelempontba kerül, egyébként 2 Szakértelempontba.
+							
+							Figyelembe kell venni: 
+								-Mágikus szakértelmet csak 0-nál nagyobb Mágia tulajdonsággal.
+								
+								-6nál magasabb szakértelemmel vagy 7 nél nagyobb specializációval nem indulhat a karakter.
+								
+								- 1 nél nagyobb lesz a szakértelem szintje, különben nem birtokolja a karakter a szakértelmet.
+							
+								-karakter generálás után elveszenk a szakértelempontok.
+								
+								- Aktív és Ismeret szakértelem pontok nem felcserélhetõk.
+		
+			Specializáció:			
+								Minden szakértelemhez csak egy specializáció tartozhat generálásnál.
+								Pl. egy fegyverre specializálódik. +1-et kap a speciális fegyverhez, de minden más fegyverre -1 -et.
+								Ugyanannyi az ára mint a sima szakértelmeknek.
+							
+			Ismeret Szakértelmek:			
+								Ismeret Szakértelem pontok = Karakter intelligenciáa *5
+								Ezeket a pontokat nyelvekre is lehet költeni.
+								Lehet specializálódni ugyanúgy.
+								fajtái: (5) (90. oldal)
+									- Utcai ismeretek
+									- Iskolai
+									- Hatodik Világbeli
+									- Háttér
+									- Érdeklõdés
+			
+			Nyelvi Szakértelmek:			
+								Legalább egy nyelvet ismer.
+								karakter Intelligenciája * 1,5 pontot tud elkölteni nyelvi ismeretekre (ismeret szakértelmek pontjait is használhatja)
+								Specializálódott nyelvi szakértelem a zsargon.
+								Az Írás/Olvasás szakértelme az ismert nyelv szakértelem szintjének felével egyenlõ. Erre nem lehet specializálódni.
+								
+			Erõforrások elosztása:
+								Pénz - nujen
+								Fontossági Szinttõl függ.
+								Felszerelések (270. oldal)
+								A kezdõ karaktereknek vásárláskor nem kellutcai indexet rászámolni.
+								Kezdõ felszerelés szintje nem lehet nagyobb mint 6, és elérhetõsége nem lehet nagyobb mint nyolc.
+								KÖTELEZÕ életvitelt vásárolni.
+								És kapcsoaltokat is.
+								Mágikus felszerelések és kiberverek vásárlására külön szabály vonatkozik (61.oldal)
+								
+			Mágikus felszerelés és varázslat:
+								Fókusz- erre varázspontot is kell költeni. Vagy Karmát a játék késõbbi folyamán.
+								A megkötéshez kell a varázspont / karma mert addig nem tudja használni a fókuszt.
+								Adeptus csak karmával tud fókuszt kötni.
+								Telejs értékû és Specializálódott varázsló is vásárolhat 25.000 nujenért Varázspontokat de 50nél nem lehet több összesen
+								
+								Minden varázspont 1 erõpontot ér varázslat vásárlásakor. Egy varázspont = 1 Karma.
+								Generáláskor nem lehet 6osnál nagyobb erejû/szintû varázslatot, fókuszt vagy szellemet, illetve hat szellemnél többet vásárolni.
+								
+								Sámánnal. Totem.
+			Kiberverek:
+								normál és alfa
+								az alfa költsége pénzben 2 szer akkora, és esszenciában 0,8 szor akkora mint a normál.
+								
+								
+			Kapcsolatok:
+								haver, ismerõs, válogatott utcai  információforrás.
+								van szintje.
+								Két ingyenes 1.es szintû kapcsolattal kezd a karakter.
+								1.es szintû: ismer de cserben hagyhat ha neki megéri.
+								2.es szintû: személyes kötelék.
+								3.as szintá: életre szóló barát
+								
+			Életvitel:
+								Havonta kell fizetni.
+								
+								Nincstelen: 0 nujen (kukázik és az utcán él)
+								Hajléktalan: foglalt házban lakik
+								Szegény:
+								Középszintû:
+								Gazdag:
+								Luxus:
+								
+								Érdemes többet fenntartani, ahol raktározhatunk fegyvereket pl.
+			Kockatartalékok		(63. oldal)			
+			
+			
+Felszerelés:
+		Fegyverek:
+				Sebzési Kódok:
+								
+								
+		Kiberverek:			Testrészenként vannak elválasztva. (Fej, Kéz Láb Test ..stb)
+							Adott kisebb testrészenként van maximum esszencia, amennyit max bele lehet tenni az adott testrészbe.
+							Fej: 	nincs limit
+							Fül: 	0,5 esszenciáig lehet beültetni
+							Szem:	0,5 esszenciáig lehet beültetni
+							Test:	nincs limit
+							végtag:	
+					
+				Füli Kiberver:
+				
+				
+Mágia:
+		Minden varázslásnak van egy (mágikus szakértelem = varázslás vagy szellemek megidézése).
+		Minden mágikus tevékenységnek van egy kimerülés kódja ami hasonlít a fegyverek sebzési szintjéhez.
+		A karakterek Akaraterejükkel
+		A Hermetikus mágusnak hermetikus könyvtárat kell vennie generáláskor 168. oldal.
+		Adeptus:
+				Képességekkel rendelkezik. Minden képességnek van képesség ára. A szétosztható képességek száma a karakter mágiaponjának számával egyenlõ.
+				Ha veszít a mágiapontjaiból az adeptus akkor veszít a képességeibõl is. 20 jó karma/ pont ért újabb képességeket vásárolhatnak.
+		
+		Teljes Mágus:
+				Lehet tanulni mágiát másoktól, de az is karmába és nuyenbe is kerül
+						
+
+		Harci mágia sebzésszintje:
+				A mágus határozhatja meg a mágia sebzésszintjét. Ettõl fog függeni kábulásszint is.
+	Néhány fontos oldal:
+							270. felszerelések
+							125. sebesülés és gyógyulás
+							158. Mágia
+							200. Mátrix elérése 
+							130. a rigókról
+							 81. szakértelmek
+							296. kiberverek
+							282. robbanóanyagok
+							284. páncél - harci tartalék módosító
+							275. meleeWeapons
+							278. TÛZFEGYVEREK
+							284. páncél és harci tartalék
+							177. varázslatok
