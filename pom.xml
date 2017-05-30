@@ -219,17 +219,21 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-enforcer-plugin</artifactId>
             <version>1.4.1</version>
             <scope>compile</scope>
         </dependency>
+        -->
+        <!--
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
             <version>2.10.3</version>
         </dependency>
+        -->
         <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -242,17 +246,21 @@
             <version>1.7.25</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.maven/maven-core -->
+        <!--
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
             <version>3.3.9</version>
         </dependency>
+        -->
         <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+        <!--
         <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.7.9</version>
         </dependency>
+        -->
 
 
 

@@ -6,6 +6,8 @@
 package view.character_sheet;
 
 import com.sun.javafx.collections.ObservableListWrapper;
+import controller.character.helpers.RaceChoiceBoxHelper;
+import controller.character.helpers.SpellCasterChoiceBoxHelper;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -111,7 +113,7 @@ public class CharacterSheetEditorStep1Controller {
     @FXML
     private Button ResetButton;
     @FXML
-    private Button CancelButton;
+    public Button CancelButton;
     @FXML
     private Button NextButton;
     
@@ -157,14 +159,138 @@ public class CharacterSheetEditorStep1Controller {
         AgeOfCharLabel.setText("");
         GenderOfCharLabel.setText("");
         WarningLabel.setText("");
+        
+        NameOfCharTextField.setText("");
+        AgeOfCharTextField.setText("");
+    }
+    
+    private void resetChoiceBoxes() {
+        SpellcasterTypePriorityChoiceBox.getSelectionModel().clearSelection();
+        SpellcasterTypePriorityChoiceBox.setValue(null);
+        RaceProrityChoiceBox.getSelectionModel().clearSelection();
+        RaceProrityChoiceBox.setValue(null);
+        AttributePriorityChoiceBox.getSelectionModel().clearSelection();
+        AttributePriorityChoiceBox.setValue(null);
+        SkillsPriorityChoiceBox.getSelectionModel().clearSelection();
+        SkillsPriorityChoiceBox.setValue(null);
+        MoneyPriorityChoiceBox.getSelectionModel().clearSelection();
+        MoneyPriorityChoiceBox.setValue(null);
+        
+        
+        //MoneyPriorityChoiceBox.getItems().removeAll((Object[])PriorityClassEnum.values());
+        
+        GenderChoiceBox.getSelectionModel().clearSelection();
     }
     
     private void remainingPriosHelper(EnumSet<PriorityClassEnum> remainingPrios) {
+        
+        logger.info("remainingPriosHelper() method called.");
+        logger.info("Remaining prios:");
+        logger.info(remainingPrios.toString());
+
+        final List<PriorityClassEnum> possibleValues = new ArrayList<>(remainingPrios);
+        
+        final ObservableList<PriorityClassEnum> possibleValuesObservable = new ObservableListWrapper<>(
+                possibleValues);
+        
+        final List<SpellcasterTypeEnum> possibleSpellcasterTypes = 
+                SpellCasterChoiceBoxHelper.determineRemainingSpellcasterEnumChoices(remainingPrios);
+        
+        final ObservableList<SpellcasterTypeEnum> possibleSpellcasterTypesObservable = new ObservableListWrapper<>(
+                possibleSpellcasterTypes);
+        
+        final List<RaceEnum> possibleRaceTypes = 
+                RaceChoiceBoxHelper.determineRemainingRaceEnumChoices(remainingPrios);
+        
+        final ObservableList<RaceEnum> possibleRaceTypesObservable = new ObservableListWrapper<>(
+                possibleRaceTypes);
+        
+        if(SpellcasterTypePriorityChoiceBox.getSelectionModel().isEmpty() )  {
+            logger.info("Rearranging empty SpellcasterTypeChoiceBox...");
+            
+            SpellcasterTypePriorityChoiceBox.setItems(possibleSpellcasterTypesObservable);
+            
+        }
+        else  if( SpellcasterTypePriorityChoiceBox.getValue() != null)   {
+//            //logger.debug("SpellcasterTypePriorityChoiceBox.getValue() == {}",SpellcasterTypePriorityChoiceBox.getValue().toString());
+//            
+            //SpellcasterTypeEnum tempEnum =(SpellcasterTypeEnum)SpellcasterTypePriorityChoiceBox.getValue();
+            //SpellcasterTypePriorityChoiceBox.getItems();
+            //possibleSpellcasterTypesObservable.add(tempEnum);
+            //SpellcasterTypePriorityChoiceBox.getSelectionModel().clearSelection();
+            //SpellcasterTypePriorityChoiceBox.getSelectionModel().selectFirst();
+            //SpellcasterTypePriorityChoiceBox.getItems().setAll(possibleSpellcasterTypesObservable);
+            //SpellcasterTypePriorityChoiceBox.getSelectionModel().select(tempEnum);
+            //possibleSpellcasterTypesObservable.remove(tempEnum);
+            //SpellcasterTypePriorityChoiceBox.getItems().addAll(possibleSpellcasterTypesObservable);
+            //boolean isModified = SpellcasterTypePriorityChoiceBox.getItems().setAll(possibleSpellcasterTypesObservable);
+            //SpellcasterTypePriorityChoiceBox.getSelectionModel().selectFirst();
+
+        }
+        
+        if(RaceProrityChoiceBox.getSelectionModel().isEmpty())  {
+            logger.info("Rearranging empty RaceChoiceBox...");
+            RaceProrityChoiceBox.setItems(possibleRaceTypesObservable);
+        }
+        
+        
+        if(AttributePriorityChoiceBox.getSelectionModel().isEmpty())    {
+            logger.info("Rearranging empty AttributesChoiceBox...");
+            AttributePriorityChoiceBox.setItems(possibleValuesObservable);
+        }
+        if(SkillsPriorityChoiceBox.getSelectionModel().isEmpty())    {
+            logger.info("Rearranging empty SkillsChoiceBox...");
+            SkillsPriorityChoiceBox.setItems(possibleValuesObservable);
+        }
+        if(MoneyPriorityChoiceBox.getSelectionModel().isEmpty())    {
+            logger.info("Rearranging empty MoneyChoiceBox...");
+            MoneyPriorityChoiceBox.setItems(possibleValuesObservable);
+        }
+    }
+    
+    private void remainingPriosHelperForResetButton(EnumSet<PriorityClassEnum> remainingPrios) {
+        final List<PriorityClassEnum> possibleValues = new ArrayList<>(remainingPrios);
+        logger.info("remainingPriosHelperForREsetButton() method called.");
+        logger.info("Remaining prios:");
+        logger.info(remainingPrios.toString());
+
+        final ObservableList<PriorityClassEnum> possibleValuesObservable = new ObservableListWrapper<>(
+                possibleValues);
+        
+        final List<SpellcasterTypeEnum> possibleSpellcasterTypes = 
+                SpellCasterChoiceBoxHelper.determineRemainingSpellcasterEnumChoices(remainingPrios);
+        
+        final ObservableList<SpellcasterTypeEnum> possibleSpellcasterTypesObservable = new ObservableListWrapper<>(
+                possibleSpellcasterTypes);
+        
+        final List<RaceEnum> possibleRaceTypes = 
+                RaceChoiceBoxHelper.determineRemainingRaceEnumChoices(remainingPrios);
+        
+        final ObservableList<RaceEnum> possibleRaceTypesObservable = new ObservableListWrapper<>(
+                possibleRaceTypes);
+        
+
+        SpellcasterTypePriorityChoiceBox.setItems(possibleSpellcasterTypesObservable);
+
+        
+        RaceProrityChoiceBox.setItems(possibleRaceTypesObservable);
+
+        
+        AttributePriorityChoiceBox.setItems(possibleValuesObservable);
+
+        SkillsPriorityChoiceBox.setItems(possibleValuesObservable);
+        
+        MoneyPriorityChoiceBox.setItems(possibleValuesObservable);
+    }
+    
+    private void remainingPriosHelperOLD(EnumSet<PriorityClassEnum> remainingPrios) {
         final List<PriorityClassEnum> possibleValues = new ArrayList<>(remainingPrios);
         logger.info(remainingPrios.toString());
 
         final ObservableList<PriorityClassEnum> possibleValuesObservable = new ObservableListWrapper<>(
                 possibleValues);
+        SpellcasterTypePriorityChoiceBox.getItems().setAll(model.character.SpellcasterTypeEnum.values());
+        RaceProrityChoiceBox.getItems().setAll(model.character.RaceEnum.values());
         AttributePriorityChoiceBox.setItems(possibleValuesObservable);
         SkillsPriorityChoiceBox.setItems(possibleValuesObservable);
         MoneyPriorityChoiceBox.setItems(possibleValuesObservable);
@@ -274,11 +400,47 @@ public class CharacterSheetEditorStep1Controller {
     
     @FXML
     private void onResetButtonAction()  {
-        resetLabels();
+        
+        resetChoiceBoxes();
+        remainingPriosHelperOLD(remainingPrios);
+        resetChoiceBoxes();
         resetPrios();
-        SpellcasterTypePriorityChoiceBox.getItems().setAll(model.character.SpellcasterTypeEnum.values());
-        RaceProrityChoiceBox.getItems().setAll(model.character.RaceEnum.values());
-        remainingPriosHelper(remainingPrios);
+        remainingPriosHelperOLD(remainingPrios);
+        resetChoiceBoxes();
+        resetLabels();
+        remainingPriosHelperOLD(remainingPrios);
+        resetChoiceBoxes();
+        remainingPriosHelperOLD(remainingPrios);
+        resetChoiceBoxes();
+        resetPrios();
+        remainingPriosHelperOLD(remainingPrios);
+        //remainingPriosHelperForResetButton(remainingPrios);
+        resetLabels();
+    }
+    
+    @FXML
+    void onCancelButtonAction(ActionEvent event) throws IOException  {
+        System.out.println("Cancel button clicked behore show, a logger szar");
+        logger.info("Cancel button clicked behore show...");
+        showFirstMenu();
+        logger.info("Cancel button clicked after show...");
+        
+    }
+    private void showFirstMenu() {
+        try {
+            FXMLLoader loader1 = new FXMLLoader();
+            loader1.setLocation(getClass().getResource("/fxml/FirstMenu.fxml"));
+            AnchorPane firstMenuView = (AnchorPane) loader1.load();
+            loader1.setRoot(this);
+
+            mainApp.getRootLayout().setCenter(firstMenuView);
+
+            //FirstMenuController firstMenuController = loader1.getController();
+            //firstMenuController.setMainApp(mainApp);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     public void showCharacterSheetEditorStep2() {
@@ -539,48 +701,149 @@ public class CharacterSheetEditorStep1Controller {
         resetPrios();
         // Log here later
 
-        SpellcasterTypePriorityChoiceBox.getItems().setAll(model.character.SpellcasterTypeEnum.values());
+        //SpellcasterTypePriorityChoiceBox.getItems().setAll(model.character.SpellcasterTypeEnum.values());
         
+        remainingPriosHelper(remainingPrios);
         SpellcasterTypePriorityChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
                 (observableValue, value, newValue) -> {
                     // LOGGING HERE
                     // ez itt jelenleg azt loggolja hogy MIRŐL váltunk
                     logger.info(SpellcasterTypePriorityChoiceBox.getSelectionModel().selectedItemProperty().toString());
+                    List<SpellcasterTypeEnum> possibleSpellcasterValues = SpellcasterTypePriorityChoiceBox.getItems();
                     //logger.info(SpellcasterTypePriorityChoiceBox.getValue().toString());
                     
-                    switch(newValue.intValue()) {
+                    try {
+                        switch(newValue.intValue()) {
                         case 0: /*non-spellcaster*/   
-                            SpellcasterTypePriorityLabel.setText("Class D or E");
-                            remainingPrios.remove(PriorityClassEnum.PRIORITY_E);
+                            SpellcasterTypePriorityLabel.setText(possibleSpellcasterValues.get(newValue.intValue()).toString());
+                            remainingPrios.remove(
+                                    SpellCasterChoiceBoxHelper
+                                    .spellcasterEnumToPriorityEnumAdapter(
+                                            possibleSpellcasterValues
+                                                    .get(newValue.intValue()
+                                                    ), remainingPrios )
+                            );
                             break;
                         case 1: /*Wizard*/   
-                            SpellcasterTypePriorityLabel.setText("Class A");
-                            remainingPrios.remove(PriorityClassEnum.PRIORITY_A);
+                            SpellcasterTypePriorityLabel.setText(possibleSpellcasterValues.get(newValue.intValue()).toString());
+                            remainingPrios.remove(
+                                    SpellCasterChoiceBoxHelper
+                                    .spellcasterEnumToPriorityEnumAdapter(
+                                            possibleSpellcasterValues
+                                                    .get(newValue.intValue()
+                                                    ), remainingPrios)
+                            );
                             break;
                         case 2: /*Adept*/   
-                            SpellcasterTypePriorityLabel.setText("Class B");
-                            remainingPrios.remove(PriorityClassEnum.PRIORITY_B);
+                            SpellcasterTypePriorityLabel.setText(possibleSpellcasterValues.get(newValue.intValue()).toString());
+                            remainingPrios.remove(
+                                    SpellCasterChoiceBoxHelper
+                                    .spellcasterEnumToPriorityEnumAdapter(
+                                            possibleSpellcasterValues
+                                                    .get(newValue.intValue()
+                                                    ), remainingPrios)
+                            );
                             break;
                         case 3: /*Specialized-Wizard*/   
-                            SpellcasterTypePriorityLabel.setText("Class C");
-                            remainingPrios.remove(PriorityClassEnum.PRIORITY_C);
+                            SpellcasterTypePriorityLabel.setText(possibleSpellcasterValues.get(newValue.intValue()).toString());
+                            remainingPrios.remove(
+                                    SpellCasterChoiceBoxHelper
+                                    .spellcasterEnumToPriorityEnumAdapter(
+                                            possibleSpellcasterValues
+                                                    .get(newValue.intValue()
+                                                    ), remainingPrios)
+                            );
                             break;
-                    }
+                        
+                        }
                     // this switch is for managing the remainingPrios synched with the comboboxes
-                    switch(value.intValue()) {
-                        case 0: /*non-spellcaster*/   
-                            remainingPrios.add(PriorityClassEnum.PRIORITY_E);
-                            break;
-                        case 1: /*Wizard*/   
-                            remainingPrios.add(PriorityClassEnum.PRIORITY_A);
-                            break;
-                        case 2: /*Adept*/   
-                            remainingPrios.add(PriorityClassEnum.PRIORITY_B);
-                            break;
-                        case 3: /*Specialized-Wizard*/   
-                            remainingPrios.add(PriorityClassEnum.PRIORITY_C);
-                            break;
+                    
+                        if(value.intValue() > -1 )  {
+                            logger.info("In SpellcasterTypeListener: 2nd switch");
+                            switch(value.intValue()) {
+                            case 0: /*non-spellcaster*/   
+                                logger.info("In SpellcasterTypeListener: adding back to remining prios case1");
+                                logger.info("{}",possibleSpellcasterValues.get(value.intValue()));
+                                logger.info("{}",SpellCasterChoiceBoxHelper
+                                        .spellcasterEnumToPriorityEnumAdapter(possibleSpellcasterValues.get(value.intValue())));
+                                remainingPrios.add(
+                                        SpellCasterChoiceBoxHelper
+                                        .spellcasterEnumToPriorityEnumAdapter(
+                                                possibleSpellcasterValues
+                                                        .get(value.intValue()
+                                                        ))
+                                );
+                                break;
+                            case 1: /*Wizard*/   
+                                logger.info("In SpellcasterTypeListener: adding back to remining prios case2");
+                                logger.info("{}",possibleSpellcasterValues.get(value.intValue()));
+                                logger.info("{}",SpellCasterChoiceBoxHelper
+                                        .spellcasterEnumToPriorityEnumAdapter(possibleSpellcasterValues.get(value.intValue())));
+                                remainingPrios.add(
+                                        SpellCasterChoiceBoxHelper
+                                        .spellcasterEnumToPriorityEnumAdapter(
+                                                possibleSpellcasterValues
+                                                        .get(value.intValue()
+                                                        ))
+                                );
+                                break;
+                            case 2: /*Adept*/  
+                                logger.info("In SpellcasterTypeListener: adding back to remining prios case3");
+                                logger.info("{}",possibleSpellcasterValues.get(value.intValue()));
+                                logger.info("{}",SpellCasterChoiceBoxHelper
+                                        .spellcasterEnumToPriorityEnumAdapter(possibleSpellcasterValues.get(value.intValue())));
+                                remainingPrios.add(
+                                        SpellCasterChoiceBoxHelper
+                                        .spellcasterEnumToPriorityEnumAdapter(
+                                                possibleSpellcasterValues
+                                                        .get(value.intValue()
+                                                        ))
+                                );
+                                break;
+                            case 3: /*Specialized-Wizard*/   
+                                logger.info("In SpellcasterTypeListener: adding back to remining prios case4");
+                                logger.info("{}",possibleSpellcasterValues.get(value.intValue()));
+                                logger.info("{}",SpellCasterChoiceBoxHelper
+                                        .spellcasterEnumToPriorityEnumAdapter(possibleSpellcasterValues.get(value.intValue())));
+                                remainingPrios.add(
+                                        SpellCasterChoiceBoxHelper
+                                        .spellcasterEnumToPriorityEnumAdapter(
+                                                possibleSpellcasterValues
+                                                        .get(value.intValue()
+                                                        ))
+                                );
+                                break;
+                            }
+//                            logger.debug("SpellcasterTypePriorityChoiceBox.getValue() == {}",SpellcasterTypePriorityChoiceBox.getValue().toString());
+//                            List<SpellcasterTypeEnum> possibleSpellcasterTypesOtherwise = 
+//                                SpellCasterChoiceBoxHelper.determineRemainingSpellcasterEnumChoices(remainingPrios);
+//                //            
+//                            SpellcasterTypeEnum tempEnum =(SpellcasterTypeEnum)SpellcasterTypePriorityChoiceBox.getValue();
+//                            possibleSpellcasterTypesOtherwise.add(tempEnum);
+//                //            //remainingPrios.add(SpellCasterChoiceBoxHelper.spellcasterEnumToPriorityEnumAdapter((SpellcasterTypeEnum) SpellcasterTypePriorityChoiceBox.getValue() ));
+//                ////        
+//                ////            ObservableList<SpellcasterTypeEnum> possibleSpellcasterTypesObservableOtherwise = new ObservableListWrapper<>(
+//                ////                    possibleSpellcasterTypes);
+//                ////            SpellcasterTypePriorityChoiceBox.setItems(possibleSpellcasterTypesObservableOtherwise);
+//                ////          
+//                //            logger.info( SpellcasterTypePriorityChoiceBox.getItems().toString());
+//                            boolean isModified = SpellcasterTypePriorityChoiceBox.getItems().setAll(possibleSpellcasterTypesOtherwise);
+//                //            logger.info( new Boolean(isModified).toString());
+//                //            //SpellcasterTypePriorityChoiceBox.getItems().add(tempEnum);
+//                //            logger.info( SpellcasterTypePriorityChoiceBox.getItems().toString());
+//                            SpellcasterTypePriorityChoiceBox.getSelectionModel().select(tempEnum);
+//                //            
+//                //            logger.info("Remaining prios:");
+//                //            logger.info(remainingPrios.toString());
+                            
+                        }
                     }
+                    catch (NullPointerException e)    {
+                        logger.info("FUCK ITS AN ERROR AT SpellcasterTypePriorityChoiceBox");
+                    }
+                    
+                    
+                    
                     logger.info(remainingPrios.toString());
                     // This line updates 3 choiceboxes with reamining priorities
                     remainingPriosHelper(remainingPrios);
@@ -588,76 +851,128 @@ public class CharacterSheetEditorStep1Controller {
         );
         
         // Race selection
-        RaceProrityChoiceBox.getItems().setAll(model.character.RaceEnum.values());
+        //RaceProrityChoiceBox.getItems().setAll(model.character.RaceEnum.values());
         
+        //remainingPriosHelper(remainingPrios);
         RaceProrityChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
                 (observableValue, value, newValue) -> {
                     // LOGGING HERE
                     // ez itt jelenleg azt loggolja hogy MIRŐL váltunk
                     logger.info(RaceProrityChoiceBox.getSelectionModel().selectedItemProperty().toString());
+                    List<RaceEnum> possibleRaceValues = RaceProrityChoiceBox.getItems();
                     
                     switch(newValue.intValue()) {
                         case 0: /*human*/   
-                            RaceProrityLabel.setText("Class D or E");
-                            if(remainingPrios.contains(PriorityClassEnum.PRIORITY_E))   {
-                                remainingPrios.remove(PriorityClassEnum.PRIORITY_E);
-                            }
-                            else    {
-                                remainingPrios.remove(PriorityClassEnum.PRIORITY_D);
-                            }
+                            RaceProrityLabel.setText(possibleRaceValues.get(newValue.intValue()).toString());
+                            remainingPrios.remove(
+                                    RaceChoiceBoxHelper
+                                    .raceEnumToPriorityEnumAdapter(
+                                            possibleRaceValues
+                                                    .get(newValue.intValue()
+                                                    ), remainingPrios)
+                            );
                             
                             break;
                         case 1: /*Elf*/   
-                            //RaceProrityLabel.setText("Class A");
+                            RaceProrityLabel.setText(possibleRaceValues.get(newValue.intValue()).toString());
+                            remainingPrios.remove(
+                                    RaceChoiceBoxHelper
+                                    .raceEnumToPriorityEnumAdapter(
+                                            possibleRaceValues
+                                                    .get(newValue.intValue()
+                                                    ), remainingPrios)
+                            );
+                            break;
                         case 2: /*Troll*/   
-                            RaceProrityLabel.setText("Class C");
-                            remainingPrios.remove(PriorityClassEnum.PRIORITY_C);
+                            RaceProrityLabel.setText(possibleRaceValues.get(newValue.intValue()).toString());
+                            remainingPrios.remove(
+                                    RaceChoiceBoxHelper
+                                    .raceEnumToPriorityEnumAdapter(
+                                            possibleRaceValues
+                                                    .get(newValue.intValue()
+                                                    ), remainingPrios)
+                            );
                             break;
                         case 3: /*Dwarf*/   
-                            //RaceProrityLabel.setText("Class D");
-                        case 4: /*Orc*/
+                            RaceProrityLabel.setText(possibleRaceValues.get(newValue.intValue()).toString());
+                            remainingPrios.remove(
+                                    RaceChoiceBoxHelper
+                                    .raceEnumToPriorityEnumAdapter(
+                                            possibleRaceValues
+                                                    .get(newValue.intValue()
+                                                    ), remainingPrios)
+                            );
                             
-                            RaceProrityLabel.setText("Class D");
-                            remainingPrios.remove(PriorityClassEnum.PRIORITY_D);
+                            break;
+                        case 4: /*Orc*/
+                            RaceProrityLabel.setText(possibleRaceValues.get(newValue.intValue()).toString());
+                            remainingPrios.remove(
+                                    RaceChoiceBoxHelper
+                                    .raceEnumToPriorityEnumAdapter(
+                                            possibleRaceValues
+                                                    .get(newValue.intValue()
+                                                    ), remainingPrios)
+                            );
                             
                             break;
                     }
                     // this switch is for managing the remainingPrios synched with the comboboxes
-                    switch(value.intValue()) {
-                        case 0: /*human*/  
-                            if(!remainingPrios.contains(PriorityClassEnum.PRIORITY_E))  {
-                                remainingPrios.add(PriorityClassEnum.PRIORITY_E);
-                            }
-                                
-                            else    {    
-                                remainingPrios.add(PriorityClassEnum.PRIORITY_D);
-                            }
-                            break;
-                        case 1: /*Elf*/  
-                        case 2:  /*Troll*/
-                            if( (newValue.intValue() == 1) || (newValue.intValue() == 2) )    {
-                                //remainingPrios.add(PriorityClassEnum.PRIORITY_D);
+                    if(value.intValue() > -1)   {
+                        switch(value.intValue()) {
+                            case 0: 
+                                remainingPrios.add(
+                                        RaceChoiceBoxHelper
+                                        .raceEnumToPriorityEnumAdapter(
+                                                possibleRaceValues
+                                                        .get(value.intValue()
+                                                        ))
+                                );
                                 break;
-                            }
-                            remainingPrios.add(PriorityClassEnum.PRIORITY_C);
-                            break;
-                        case 3:/*Dwarf*/      
-                        case 4: /*Orc*/
-                            if( (newValue.intValue() == 3) || (newValue.intValue() == 4) )    {
-                                //remainingPrios.add(PriorityClassEnum.PRIORITY_D);
+                            case 1: 
+                                remainingPrios.add(
+                                        RaceChoiceBoxHelper
+                                        .raceEnumToPriorityEnumAdapter(
+                                                possibleRaceValues
+                                                        .get(value.intValue()
+                                                        ))
+                                );
                                 break;
-                            }
-                                
-                            remainingPrios.add(PriorityClassEnum.PRIORITY_D);
-                            break;
+                            case 2:  
+                                remainingPrios.add(
+                                        RaceChoiceBoxHelper
+                                        .raceEnumToPriorityEnumAdapter(
+                                                possibleRaceValues
+                                                        .get(value.intValue()
+                                                        ))
+                                );
+                                break;
+                            case 3:
+                                remainingPrios.add(
+                                        RaceChoiceBoxHelper
+                                        .raceEnumToPriorityEnumAdapter(
+                                                possibleRaceValues
+                                                        .get(value.intValue()
+                                                        ))
+                                );
+                                break;
+                            case 4: remainingPrios.add(
+                                        RaceChoiceBoxHelper
+                                        .raceEnumToPriorityEnumAdapter(
+                                                possibleRaceValues
+                                                        .get(value.intValue()
+                                                        ))
+                                );
+                                break;
+                        }
                     }
+                    
                     logger.info("Remaining prios:");
                     logger.info(remainingPrios.toString());
                     remainingPriosHelper(remainingPrios);
                 }
         );
 
-        remainingPriosHelper(remainingPrios);
+        //remainingPriosHelper(remainingPrios);
         AttributePriorityChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
                     
@@ -742,11 +1057,11 @@ public class CharacterSheetEditorStep1Controller {
                     }
                     logger.info("Attribute prio choosen. Remaining prios:");
                     logger.info(remainingPrios.toString());
-                    remainingPriosHelperSkillsAndMoney(remainingPrios);
+                    remainingPriosHelper(remainingPrios);
                 }
         );
         
-        remainingPriosHelperSkillsAndMoney(remainingPrios);
+        //remainingPriosHelper(remainingPrios);
         SkillsPriorityChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
                     List<PriorityClassEnum> possibleSkillValues = SkillsPriorityChoiceBox.getItems();
@@ -831,10 +1146,11 @@ public class CharacterSheetEditorStep1Controller {
                     }
                     logger.info("Attribute skill choosen. Remaining prios:");
                     logger.info(remainingPrios.toString());
-                    remainingPriosHelperMoney(remainingPrios);
+                    remainingPriosHelper(remainingPrios);
                 }
         );
         
+        //remainingPriosHelper(remainingPrios);
         MoneyPriorityChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
                     List<PriorityClassEnum> possibleMoneyValues = MoneyPriorityChoiceBox.getItems();
@@ -918,6 +1234,7 @@ public class CharacterSheetEditorStep1Controller {
                     }
                     logger.info("Attribute skill choosen. Remaining prios:");
                     logger.info(remainingPrios.toString());
+                    remainingPriosHelper(remainingPrios);
                 }
         );
         
@@ -936,6 +1253,28 @@ public class CharacterSheetEditorStep1Controller {
                     }
                 }
         );
+        NameOfCharTextField.textProperty().addListener(new ChangeListener<String>() {
+        @Override
+        public void changed(ObservableValue<? extends String> observable,
+                String oldValue, String newValue) {
+
+            NameOfCharLabel.setText(newValue);
+            }
+        });
+        
+        AgeOfCharTextField.textProperty().addListener(new ChangeListener<String>() {
+        @Override
+        public void changed(ObservableValue<? extends String> observable,
+                String oldValue, String newValue) {
+
+            AgeOfCharLabel.setText(newValue);
+            }
+        });
+        //CancelButton = new Button();
+//        CancelButton.setOnAction(event -> {
+//            logger.info("Cancel Button event listener is working!");
+//            //showFirstMenu();
+//        });
 
     }
     public void setMainApp(LaunchFXApp mainApp) {
