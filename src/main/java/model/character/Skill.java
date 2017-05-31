@@ -5,14 +5,17 @@
  */
 package model.character;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javax.xml.bind.annotation.*;
 
 /**
  *
  * @author Dr.Chase
  */
-@XmlRootElement(name = "skill")
 @XmlAccessorType (XmlAccessType.FIELD)
+@XmlRootElement(name = "skill")
+//@XmlAccessorType (XmlAccessType.FIELD)
 
 public class Skill {
     private String nameOfSkill;
@@ -71,4 +74,31 @@ public class Skill {
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
     }
+    
+//    public SimpleStringProperty getNameOfSkillProperty() {
+//        return new SimpleStringProperty(nameOfSkill);
+//    }
+//
+//    public void setNameOfSkill(SimpleStringProperty nameOfSkill) {
+//        this.nameOfSkill = nameOfSkill.getValue();
+//    }
+//
+//
+//    
+//
+//    public SimpleIntegerProperty getLevelOfSkillProperty() {
+//        return new SimpleIntegerProperty(levelOfSkill);
+//    }
+//
+//    public void setLevelOfSkill(SimpleIntegerProperty levelOfSkill) {
+//        this.levelOfSkill = levelOfSkill.getValue();
+//    }
+//
+//    public SimpleStringProperty getDescriptionProperty() {
+//        return new SimpleStringProperty(description);
+//    }
+//
+//    public void setDescription(SimpleStringProperty description) {
+//        this.description = description.getValue();
+//    }
 }

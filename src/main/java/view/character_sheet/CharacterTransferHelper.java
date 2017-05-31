@@ -13,4 +13,9 @@ import model.character.AbstractCharacter;
  */
 public class CharacterTransferHelper {
     public static AbstractCharacter transferCharacter;
+    
+    public static boolean isStep1Visited = false;
+    public static boolean isCharacterLoadedFromFile = false;
+    public static boolean isSkillSpent = false;
+    
 }

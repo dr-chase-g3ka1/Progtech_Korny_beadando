@@ -35,25 +35,25 @@
             <Label text="Strength" GridPane.rowIndex="2" />
             <Label text="Charisma" GridPane.rowIndex="3" />
             <Label text="Intelligence" GridPane.rowIndex="4" />
-            <Button fx:id="BodyAdderButton" mnemonicParsing="false" onAction="#onBodyAddButtonPressed" prefHeight="34.0" prefWidth="33.0" text="+" GridPane.columnIndex="1" />
-            <Button fx:id="BodyDividerButton" mnemonicParsing="false" onAction="#onBodyDivideButtonPressed" prefHeight="36.0" prefWidth="44.0" text="-" GridPane.columnIndex="2" />
-            <Button fx:id="AgilityAdderButton" mnemonicParsing="false" onAction="#onAgilityAddButtonPressed" prefHeight="31.0" prefWidth="37.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="AgilityDividerButton" mnemonicParsing="false" onAction="#onAgilityDivideButtonPressed" prefHeight="42.0" prefWidth="40.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="StrengthAdderButton" mnemonicParsing="false" onAction="#onStrengthAddButtonPressed" prefHeight="32.0" prefWidth="35.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="StrengthDividerButton" mnemonicParsing="false" onAction="#onStrengthDivideButtonPressed" prefHeight="36.0" prefWidth="36.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button fx:id="CharismaAdderButton" mnemonicParsing="false" onAction="#onCharismaAddButtonPressed" prefHeight="32.0" prefWidth="39.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="CharismaDividerButton" mnemonicParsing="false" onAction="#onCharismaDivideButtonPressed" prefHeight="39.0" prefWidth="42.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button fx:id="IntelligenceAdderButton" mnemonicParsing="false" onAction="#onIntelligenceAddButtonPressed" prefHeight="34.0" prefWidth="40.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button fx:id="IntelligenceDividerButton" mnemonicParsing="false" onAction="#onIntelligenceDivideButtonPressed" prefHeight="39.0" prefWidth="44.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Button fx:id="WillAdderButton" mnemonicParsing="false" onAction="#onWillAddButtonPressed" prefHeight="33.0" prefWidth="35.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button fx:id="WillDividerButton" mnemonicParsing="false" onAction="#onWillDivideButtonPressed" prefHeight="37.0" prefWidth="41.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Button fx:id="BodyAdderButton" alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#onBodyAddButtonPressed" prefHeight="30.0" prefWidth="30.0" text="+" GridPane.columnIndex="1" />
+            <Button fx:id="BodyDividerButton" alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#onBodyDivideButtonPressed" prefHeight="30.0" prefWidth="30.0" text="-" GridPane.columnIndex="2" />
+            <Button fx:id="AgilityAdderButton" alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#onAgilityAddButtonPressed" prefHeight="30.0" prefWidth="30.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="AgilityDividerButton" alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#onAgilityDivideButtonPressed" prefHeight="30.0" prefWidth="30.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="StrengthAdderButton" alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#onStrengthAddButtonPressed" prefHeight="30.0" prefWidth="30.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="StrengthDividerButton" alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#onStrengthDivideButtonPressed" prefHeight="30.0" prefWidth="30.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="CharismaAdderButton" alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#onCharismaAddButtonPressed" prefHeight="30.0" prefWidth="30.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="CharismaDividerButton" alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#onCharismaDivideButtonPressed" prefHeight="30.0" prefWidth="30.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="IntelligenceAdderButton" alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#onIntelligenceAddButtonPressed" prefHeight="30.0" prefWidth="30.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="IntelligenceDividerButton" alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#onIntelligenceDivideButtonPressed" prefHeight="30.0" prefWidth="30.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button fx:id="WillAdderButton" alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#onWillAddButtonPressed" prefHeight="30.0" prefWidth="30.0" text="+" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="WillDividerButton" alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#onWillDivideButtonPressed" prefHeight="30.0" prefWidth="30.0" text="-" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <Label text="Will" GridPane.rowIndex="5" />
-            <Label fx:id="BodyCalculatedLabel" text="Label" GridPane.columnIndex="4" />
-            <Label fx:id="AgilityCalculatedLabel" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Label fx:id="StrengthCalculatedLabel" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Label fx:id="CharismaCalculatedLabel" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-            <Label fx:id="IntelligenceCalculatedLabel" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-            <Label fx:id="WillCalculatedLabel" prefHeight="17.0" prefWidth="28.0" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <Label fx:id="BodyCalculatedLabel" GridPane.columnIndex="4" />
+            <Label fx:id="AgilityCalculatedLabel" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Label fx:id="StrengthCalculatedLabel" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Label fx:id="CharismaCalculatedLabel" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <Label fx:id="IntelligenceCalculatedLabel" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Label fx:id="WillCalculatedLabel" prefHeight="17.0" prefWidth="28.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
             <Label fx:id="BodyBaseLabel" text="Label" textAlignment="CENTER" GridPane.columnIndex="3" />
             <Label fx:id="AgilityBaseLabel" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <Label fx:id="StrengthBaseLabel" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="2" />
@@ -61,18 +61,17 @@
             <Label fx:id="IntelligenceBaseLabel" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="4" />
             <Label fx:id="WillBaseLabel" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="5" />
             <Label text="Base" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-            <Label text="Calculated" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+            <Label GridPane.columnIndex="4" GridPane.rowIndex="6" />
          </children>
       </GridPane>
       <Label layoutX="105.0" layoutY="14.0" text="Distributable Attributes:" AnchorPane.topAnchor="14.0" />
       <Label fx:id="DistributableAttributesLabel" layoutX="243.0" layoutY="14.0" text="X" />
       <ButtonBar layoutX="93.0" layoutY="342.0" prefHeight="40.0" prefWidth="436.0" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="342.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Cancel" />
-            <Button mnemonicParsing="false" text="Reset" />
-            <Button mnemonicParsing="false" text="Back" />
+          <Button fx:id="CancelButton" mnemonicParsing="false" onAction="#onCancelButtonClicked" text="Cancel" />
+            <Button fx:id="ResetButton" mnemonicParsing="false" onAction="#onResetButtonClicked" text="Reset" />
+            <Button fx:id="ResetButton" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Back" />
             <Button fx:id="NextButton" mnemonicParsing="false" onAction="#onNextButtonClicked" text="Next" />
-            <Button mnemonicParsing="false" text="Finalize" />
         </buttons>
       </ButtonBar>
       <Label fx:id="WarningLabel" layoutX="23.0" layoutY="279.0" text="Label" textFill="RED">

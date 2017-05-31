@@ -21,6 +21,9 @@ import controller.character.helpers.StartingLanguagelPointsHelper;
 import controller.character.helpers.StartingSkillPointsHelper;
 import model.character.SpellcasterTypeEnum;
 import controller.character.helpers.StartingKnowledgePointsHelper;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
 import shadowrunchargenproto_v0.pkg0.LaunchFXApp;
 
 /**
@@ -116,6 +119,17 @@ public class CharacterSheetEditorStep3Controller {
     
     @FXML
     Button SaveButton;
+    @FXML
+    Button BackButton;
+    @FXML
+    Button MainMenuButton;
+    @FXML
+    Button ActiveSkillsButton;
+    @FXML
+    Button KnowledgeSkillsButton;
+    @FXML
+    Button LanguageSkillsButton;
+    
     
 
     public CharacterSheetEditorStep2Controller getCharacterSheetEditorStep2Controller() {
@@ -272,10 +286,30 @@ public class CharacterSheetEditorStep3Controller {
     
     @FXML
     private void setActiveSkillPointsLabel() {
+        if(CharacterTransferHelper.isCharacterLoadedFromFile)   {
+            ActiveSkillPointsLabel.setText(Integer.toString(character.getAvailableActiveSkillPoints()));
+        }
         PriorityClassEnum skillsPrio = character.getPrioSkills();
         Integer cInteger = StartingSkillPointsHelper.getMaxSkillpointsFromCharacter(character);
         ActiveSkillPointsLabel.setText(cInteger.toString());
     }
+    
+    @FXML
+    void setActiveSkillPointsLabel(boolean isCharacterLoaded) {
+        if(!isCharacterLoaded)  {
+            PriorityClassEnum skillsPrio = character.getPrioSkills();
+            Integer cInteger = StartingSkillPointsHelper.getMaxSkillpointsFromCharacter(character);
+            ActiveSkillPointsLabel.setText(cInteger.toString());
+        }
+        else    {
+            ActiveSkillPointsLabel.setText(Integer.toString(character.getAvailableActiveSkillPoints()));
+        }
+        if(CharacterTransferHelper.isSkillSpent)    {
+             ActiveSkillPointsLabel.setText(Integer.toString(character.getAvailableActiveSkillPoints()));
+        }
+        
+    }
+
     
     @FXML
     private void setKnowledgeSkillPointsLabel() {
@@ -342,9 +376,36 @@ public class CharacterSheetEditorStep3Controller {
         System.out.println("Saving Character");
         File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
         if (file != null) {
+            character.setAvailableActiveSkillPoints(Integer.parseUnsignedInt(ActiveSkillPointsLabel.getText()));
             XMLSaver.saveCharacterToFileXML(character, file);
             System.out.println("Step3 - character saved as xml file.");
         }
+    }
+    
+//    private void decideHowActiveSkillsShouldBeTransferred(boolean isCharacterLoadedFromFile) {
+//        if(isCharacterLoadedFromFile)   {
+//            
+//        }
+//    }
+    
+    @FXML
+    private void onActiveSkillsButtonClicked() throws IOException  {
+        CharacterTransferHelper.transferCharacter = character;
+            
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/ActiveSkills.fxml"));
+        AnchorPane ActiveSkillsAnchorPane = (AnchorPane) loader.load();
+        loader.setRoot(this);
+
+        mainApp.setCharacter(character);
+        
+        ActiveSkillsController controller = loader.getController();
+        mainApp.setCharEditorStep3Controller(this);
+        //mainApp.setCharEditorStep3AnchorPane(ActiveSkillsAnchorPane);
+        controller.setCharacter(character);
+        controller.setMainApp(mainApp);
+        
+        mainApp.getRootLayout().setCenter(ActiveSkillsAnchorPane);
     }
     
     
@@ -378,10 +439,21 @@ public class CharacterSheetEditorStep3Controller {
     }
     
     private void setFirstGridInSecondColumnDatas() {
-        setActiveSkillPointsLabel();
+        setActiveSkillPointsLabel(CharacterTransferHelper.isCharacterLoadedFromFile);
         setKnowledgeSkillPointsLabel();
         setLanguageSkillPointsLabelLabel();
         setMoneyLabel();
+    }
+    
+    @FXML
+    private void onBackButtonClicked()  {
+        mainApp.getRootLayout().setCenter(mainApp.getCharEditorStep2AnchorPane());
+    }
+    @FXML
+    private void onMainMenuButtonClicked()  {
+        CharacterTransferHelper.isCharacterLoadedFromFile = false;
+        CharacterTransferHelper.transferCharacter = null;
+        mainApp.getRootLayout().setCenter(mainApp.getFirstMenuAnchorPane());
     }
     
     public void initialize() {
@@ -390,6 +462,10 @@ public class CharacterSheetEditorStep3Controller {
         setSecondGridAttributeDatas();
         setThirdGridDatas();
         setFirstGridInSecondColumnDatas();
+        if(CharacterTransferHelper.isCharacterLoadedFromFile == true)   {
+            BackButton.setVisible(false);
+            BackButton.setManaged(false);
+        }
 //        XMLSaver.printOutCharacterXML(character);
 //        XMLSaver.saveCharacterToFileXML(character);
     }    

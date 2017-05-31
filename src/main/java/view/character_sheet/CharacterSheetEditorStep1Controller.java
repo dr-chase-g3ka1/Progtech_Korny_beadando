@@ -74,39 +74,39 @@ public class CharacterSheetEditorStep1Controller {
     private PriorityClassEnum moneyPrioClass;
     
     @FXML
-    private Label SpellcasterTypePriorityLabel;
+     Label SpellcasterTypePriorityLabel;
     @FXML
-    private Label RaceProrityLabel;
+     Label RaceProrityLabel;
     @FXML
-    private Label AttributePriorityLabel;
+     Label AttributePriorityLabel;
     @FXML
-    private Label SkillsPriorityLabel;
+     Label SkillsPriorityLabel;
     @FXML
-    private Label MoneyPriorityLabel;
+     Label MoneyPriorityLabel;
     
     @FXML
-    private Label NameOfCharLabel;
+     Label NameOfCharLabel;
     @FXML
-    private Label AgeOfCharLabel;
+     Label AgeOfCharLabel;
     @FXML
-    private Label GenderOfCharLabel;
+     Label GenderOfCharLabel;
     @FXML
     private Label WarningLabel;
     
     @FXML
-    private ChoiceBox SpellcasterTypePriorityChoiceBox;
+     ChoiceBox SpellcasterTypePriorityChoiceBox;
     @FXML
-    private ChoiceBox RaceProrityChoiceBox;
+     ChoiceBox RaceProrityChoiceBox;
     @FXML
-    private ChoiceBox AttributePriorityChoiceBox;
+     ChoiceBox AttributePriorityChoiceBox;
     @FXML
-    private ChoiceBox SkillsPriorityChoiceBox;
+     ChoiceBox SkillsPriorityChoiceBox;
     @FXML
-    private ChoiceBox MoneyPriorityChoiceBox;
+     ChoiceBox MoneyPriorityChoiceBox;
     @FXML
-    private TextField NameOfCharTextField;
+     TextField NameOfCharTextField;
     @FXML
-    private TextField AgeOfCharTextField;
+     TextField AgeOfCharTextField;
     @FXML
     private ChoiceBox GenderChoiceBox;
     
@@ -398,9 +398,7 @@ public class CharacterSheetEditorStep1Controller {
         return strOutput;
     }
     
-    @FXML
-    private void onResetButtonAction()  {
-        
+    void resetValues()  {
         resetChoiceBoxes();
         remainingPriosHelperOLD(remainingPrios);
         resetChoiceBoxes();
@@ -419,9 +417,15 @@ public class CharacterSheetEditorStep1Controller {
     }
     
     @FXML
+    private void onResetButtonAction()  {
+        resetValues();
+    }
+    
+    @FXML
     void onCancelButtonAction(ActionEvent event) throws IOException  {
         System.out.println("Cancel button clicked behore show, a logger szar");
         logger.info("Cancel button clicked behore show...");
+        CharacterTransferHelper.isStep1Visited = true;
         showFirstMenu();
         logger.info("Cancel button clicked after show...");
         
@@ -435,8 +439,8 @@ public class CharacterSheetEditorStep1Controller {
 
             mainApp.getRootLayout().setCenter(firstMenuView);
 
-            //FirstMenuController firstMenuController = loader1.getController();
-            //firstMenuController.setMainApp(mainApp);
+            FirstMenuController firstMenuController = loader1.getController();
+            firstMenuController.setMainApp(mainApp);
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -456,6 +460,7 @@ public class CharacterSheetEditorStep1Controller {
             CharacterSheetEditorStep2Controller controller = loader.getController();
             controller.setMainApp(mainApp);
             controller.setCharacterSheetEditorStep1Controller(this);
+            mainApp.setCharEditorStep2AnchorPane(characterSheetEditorStep2);
             //controller.setMyCharacter(character);
 
             // Set person overview into the center of root layout.

@@ -58,7 +58,7 @@
       </GridPane>
       <Button fx:id="NextButton" layoutX="434.0" layoutY="337.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="43.0" prefWidth="90.0" text="Next" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="38.0" />
       <Button fx:id="ResetButton" layoutX="321.0" layoutY="337.0" mnemonicParsing="false" onAction="#onResetButtonAction" prefHeight="43.0" prefWidth="90.0" text="Reset" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="151.0" />
-      <Button layoutX="207.0" layoutY="337.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="90.0" text="Cancel" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="265.0" />
+      <Button fx:id="CancelButton" layoutX="207.0" layoutY="337.0" mnemonicParsing="false" onAction="#onCancelButtonAction" prefHeight="43.0" prefWidth="90.0" text="Cancel" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="265.0" />
       <Label fx:id="WarningLabel" layoutX="39.0" layoutY="350.0" text="You are not finished!" textFill="RED" visible="false">
          <font>
             <Font name="System Bold" size="12.0" />

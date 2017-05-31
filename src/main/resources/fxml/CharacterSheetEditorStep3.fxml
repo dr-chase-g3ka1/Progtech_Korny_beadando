@@ -7,9 +7,8 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="411.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.character_sheet.CharacterSheetEditorStep3Controller">
+<AnchorPane id="AnchorPane" prefHeight="426.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.character_sheet.CharacterSheetEditorStep3Controller">
    <children>
       <GridPane layoutX="42.0" layoutY="41.0" prefHeight="62.0" prefWidth="213.0">
         <columnConstraints>
@@ -118,11 +117,6 @@
             <Separator prefWidth="200.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <Label layoutX="368.0" layoutY="217.0" text="TODOS:" textFill="#ff00dd">
-         <font>
-            <Font name="System Bold Italic" size="24.0" />
-         </font>
-      </Label>
       <GridPane layoutX="255.0" layoutY="41.0" prefHeight="90.0" prefWidth="272.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -145,29 +139,11 @@
             <Label fx:id="MoneyLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <Button fx:id="SaveButton" layoutX="439.0" layoutY="160.0" mnemonicParsing="false" onAction="#onSaveButtonClicked" prefHeight="35.0" prefWidth="88.0" text="Save" />
-      <GridPane layoutX="282.0" layoutY="255.0" prefHeight="127.0" prefWidth="260.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="140.0" text="Buy Items" />
-            <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="142.0" text="Manage magic" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="147.0" text="Manage Weapons" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="132.0" text="Buy Vehicle" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="85.0" prefWidth="173.0" text="Manage Skills" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="159.0" text="Manage Safehouses" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="68.0" prefWidth="160.0" text="Manage Contacts" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" prefHeight="81.0" prefWidth="156.0" text="Get Cyber Transplant" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-         </children>
-      </GridPane>
-      <Button layoutX="321.0" layoutY="160.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="78.0" text="Back" />
+      <Button fx:id="SaveButton" layoutX="439.0" layoutY="160.0" mnemonicParsing="false" onAction="#onSaveButtonClicked" prefHeight="35.0" prefWidth="95.0" text="Save" />
+      <Button fx:id="BackButton" layoutX="321.0" layoutY="160.0" mnemonicParsing="false" onAction="#onBackButtonClicked" prefHeight="35.0" prefWidth="95.0" text="Back" />
+      <Button fx:id="ActiveSkillsButton" layoutX="439.0" layoutY="213.0" mnemonicParsing="false" onAction="#onActiveSkillsButtonClicked" prefHeight="35.0" prefWidth="95.0" text="Active Skills" />
+      <Button fx:id="MainMenuButton" layoutX="321.0" layoutY="213.0" mnemonicParsing="false" onAction="#onMainMenuButtonClicked" prefHeight="35.0" prefWidth="95.0" text="Main Menu" />
+      <Button fx:id="KnowledgeSkillsButton" layoutX="439.0" layoutY="258.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="95.0" text="Knowledge Skills" visible="false" />
+      <Button fx:id="LanguageSkillsButton" layoutX="439.0" layoutY="309.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="95.0" text="Language Skills" visible="false" />
    </children>
 </AnchorPane>

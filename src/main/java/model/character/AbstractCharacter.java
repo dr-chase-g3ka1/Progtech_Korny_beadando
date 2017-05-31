@@ -5,12 +5,16 @@
  */
 package model.character;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import model.character.spellcaster.spell.AbstractSpell;
 import model.item.AbstractItem;
 import model.item.implant.CyberWare;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
@@ -23,6 +27,7 @@ import model.character.spellcaster.chartypes.Wizard;
  *
  * @author Dr.Chase
  */
+@XmlAccessorType (XmlAccessType.FIELD)
 @XmlRootElement(name = "character")
 @XmlSeeAlso({Adept.class, SpecializedWizard.class, Wizard.class, NonSpellcaster.class})
 public abstract class AbstractCharacter implements CharacterInterface {
@@ -97,17 +102,33 @@ public abstract class AbstractCharacter implements CharacterInterface {
     PriorityClassEnum prioResources;
     
     // Available skill points depend on prioSkills
-    protected int availableSkillPoints;
+    protected int availableActiveSkillPoints;
+    protected int availablePassiveSkillPoints;
+    protected int availableLanguageSkillPoints;
     
     // skill containers
+    @XmlElementWrapper(name="listOfActiveSkills")
+    @XmlElement(name="skill")
     protected List<Skill> listOfSkills;
+    
     protected List<Knowledge> listOfKnowledges;
+    
     protected List<LanguageSkill> listOfLanguageSkills;
     
     protected List<CyberWare> cyberImplants;
 
     
     protected List<model.item.AbstractItem> inventory;
+
+    public AbstractCharacter() {
+        listOfSkills = new ArrayList<>();
+        listOfKnowledges = new ArrayList<>();
+        listOfLanguageSkills = new ArrayList<>();
+        cyberImplants = new ArrayList<>();
+        inventory = new ArrayList<>();
+    }
+    
+    
     
     // Abstract Class Functions
     
@@ -469,12 +490,12 @@ public abstract class AbstractCharacter implements CharacterInterface {
 
     /* Will be deprecated */
     public int getAvailableSkillPoints() {
-        return availableSkillPoints;
+        return availableActiveSkillPoints;
     }
 
     /* Will be deprecated */
     public void setAvailableSkillPoints(int availableSkillPoints) {
-        this.availableSkillPoints = availableSkillPoints;
+        this.availableActiveSkillPoints = availableSkillPoints;
     }
 
     public List<Skill> getListOfSkills() {
@@ -527,5 +548,31 @@ public abstract class AbstractCharacter implements CharacterInterface {
     public abstract List<AbstractSpell> getSpellList();
     
     public abstract void setSpellList(List<AbstractSpell> spellList);
+
+    public int getAvailableActiveSkillPoints() {
+        return availableActiveSkillPoints;
+    }
+
+    public void setAvailableActiveSkillPoints(int availableActiveSkillPoints) {
+        this.availableActiveSkillPoints = availableActiveSkillPoints;
+    }
+
+    public int getAvailablePassiveSkillPoints() {
+        return availablePassiveSkillPoints;
+    }
+
+    public void setAvailablePassiveSkillPoints(int availablePassiveSkillPoints) {
+        this.availablePassiveSkillPoints = availablePassiveSkillPoints;
+    }
+
+    public int getAvailableLanguageSkillPoints() {
+        return availableLanguageSkillPoints;
+    }
+
+    public void setAvailableLanguageSkillPoints(int availableLanguageSkillPoints) {
+        this.availableLanguageSkillPoints = availableLanguageSkillPoints;
+    }
+    
+    
     
 }

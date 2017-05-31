@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.character_sheet.ActiveSkillsController">
+   <children>
+      <SplitPane dividerPositions="0.31281198003327787" prefHeight="400.0" prefWidth="603.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="167.0">
+               <children>
+                  <TableView fx:id="AvailableSkillsTableView" layoutX="8.0" layoutY="31.0" prefHeight="306.0" prefWidth="170.0">
+                    <columns>
+                      <TableColumn fx:id="AvailableSkillsTableColumn" prefWidth="135.00003051757812" text="Name" />
+                    </columns>
+                  </TableView>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="6.0" text="Available Skills:" />
+                  <Button fx:id="AddSkillButton" layoutX="17.0" layoutY="350.0" mnemonicParsing="false" onAction="#onAddSkillButtonClicked" text="Add skill" />
+                  <Button fx:id="RemoveSkillButton" layoutX="95.0" layoutY="350.0" mnemonicParsing="false" onAction="#onRemoveSkillButtonClicked" text="remove skill" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="142.0">
+               <children>
+                  <SplitPane dividerPositions="0.5" layoutX="-1.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="410.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TextArea fx:id="DescriptionTextArea" editable="false" layoutX="209.0" layoutY="43.0" prefHeight="133.0" prefWidth="185.0" wrapText="true" />
+                              <Label layoutX="264.0" layoutY="14.0" text="Description:" />
+                              <GridPane layoutX="9.0" layoutY="20.0" prefHeight="87.0" prefWidth="170.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="53.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.0" minWidth="10.0" prefWidth="117.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Name:" />
+                                    <Label text="Level:" GridPane.rowIndex="1" />
+                                    <Label fx:id="NameOfSkillLabel" text="Label" GridPane.columnIndex="1" />
+                                    <Label fx:id="LevelOfSkillLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+                              <Label layoutX="66.0" layoutY="174.0" text="Your skills:" />
+                              <GridPane layoutX="9.0" layoutY="122.0" prefHeight="25.0" prefWidth="170.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="67.0" minWidth="10.0" prefWidth="41.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="52.0" minWidth="10.0" prefWidth="44.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Change lvl" />
+                                    <Button fx:id="SubstractOneLevelButton" mnemonicParsing="false" onAction="#onMinusOneLevelButtonClicked" prefHeight="25.0" prefWidth="44.0" text="-" GridPane.columnIndex="2" />
+                                    <Button fx:id="PlusOneLevelButton" mnemonicParsing="false" onAction="#onPlusOneLevelButtonClicked" prefHeight="25.0" prefWidth="44.0" text="+" GridPane.columnIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <ButtonBar layoutX="194.0" layoutY="142.0" prefHeight="40.0" prefWidth="200.0">
+                                <buttons>
+                                  <Button fx:id="CancelButton" mnemonicParsing="false" onAction="#onCancelButtonClicked" text="Cancel" />
+                                    <Button fx:id="OkButton" mnemonicParsing="false" onAction="#onOkButtonClicked" text="OK" />
+                                </buttons>
+                              </ButtonBar>
+                              <TableView fx:id="YourSkillsTableView" layoutX="15.0" layoutY="7.0" prefHeight="177.0" prefWidth="179.0">
+                                <columns>
+                                  <TableColumn fx:id="YourSkillsNameTableColumn" prefWidth="98.0" text="Name" />
+                                  <TableColumn fx:id="YourSkillsLevelTableColumn" prefWidth="101.0" text="Level" />
+                                </columns>
+                              </TableView>
+                              <GridPane layoutX="204.0" layoutY="22.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Skill ponts left:" />
+                                    <Label fx:id="SkillPointsLeftLabel" text="Label" GridPane.columnIndex="1" />
+                                 </children>
+                              </GridPane>
+                              <Label layoutX="204.0" layoutY="52.0" text="Cost of the skill equals to" />
+                              <Label layoutX="204.0" layoutY="69.0" text="the level of the skill." />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

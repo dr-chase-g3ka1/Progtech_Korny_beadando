@@ -6,15 +6,11 @@
 package view.character_sheet;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import model.character.AbstractCharacter;
 import controller.character.helpers.StartingAttributesHelper;
@@ -99,6 +95,11 @@ public class CharacterSheetEditorStep2Controller {
     private Button FinalizeButton;
     @FXML
     private Button NextButton;
+    @FXML
+    private Button ResetButton;
+    @FXML
+    private Button CancelButton;
+    
     
     @FXML
     private Label BodyBaseLabel;
@@ -290,6 +291,7 @@ public class CharacterSheetEditorStep2Controller {
     private void showCharacterSheetEditorStep3()  {
         try {
             CharacterTransferHelper.transferCharacter = character;
+            CharacterTransferHelper.isCharacterLoadedFromFile = false;
             
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/CharacterSheetEditorStep3.fxml"));
@@ -299,18 +301,37 @@ public class CharacterSheetEditorStep2Controller {
             mainApp.setCharacter(character);
             CharacterSheetEditorStep3Controller controller = loader.getController();
             controller.setMainApp(mainApp);
-//            controller.setCharacterSheetEditorStep1Controller(this);
-
-            // Set person overview into the center of root layout.
+            mainApp.setCharEditorStep3AnchorPane(characterSheetEditorStep3);
+            mainApp.setCharEditorStep3Controller(controller);
             mainApp.getRootLayout().setCenter(characterSheetEditorStep3);
-            
-            // Give the controller access to the main app.
-            // These 2 lines below belong to Tutorial 2.
-
             
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    private void goBackToCharacterSheetEditorStep1()  {
+            CharacterTransferHelper.transferCharacter = null;
+            mainApp.setCharacter(null);
+            AnchorPane step1AnchorPane = mainApp.getCharEditorStep1AnchorPane();
+            CharacterSheetEditorStep1Controller step1Controller = mainApp.getCharEditorStep1Controller();
+            
+            //step1Controller.resetValues();
+            mainApp.getRootLayout().setCenter(step1AnchorPane);
+    }
+    
+    private void goBackToFirstMenu()  {
+            CharacterTransferHelper.transferCharacter = null;
+            mainApp.setCharacter(null);
+            AnchorPane firstMenuAnchorPane = mainApp.getFirstMenuAnchorPane();
+            FirstMenuController firstMenuController = mainApp.getFirstMenuController();
+            
+            AnchorPane step1AnchorPane = mainApp.getCharEditorStep1AnchorPane();
+            CharacterSheetEditorStep1Controller step1Controller = mainApp.getCharEditorStep1Controller();
+            
+            step1Controller.resetValues();
+
+            mainApp.getRootLayout().setCenter(firstMenuAnchorPane);
     }
     
     @FXML
@@ -327,6 +348,25 @@ public class CharacterSheetEditorStep2Controller {
             WarningLabel.setVisible(true);
         }
     }
+    
+    @FXML
+    private void onResetButtonClicked()  {
+        InitializeBaseLabels();
+        InitializeDistributableAttributesLabel();
+        InitializeMaxAttrs();
+    }
+    
+    @FXML
+    private void onBackButtonClicked()  {
+        goBackToCharacterSheetEditorStep1();
+    }
+    
+    @FXML
+    private void onCancelButtonClicked()  {
+        goBackToFirstMenu();
+    }
+    
+
 
     
     public void initialize() {
