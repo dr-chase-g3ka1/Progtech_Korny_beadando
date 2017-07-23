@@ -47,6 +47,8 @@ import model.character.SpellcasterTypeEnum;
 import controller.character.helpers.StartingAttributesHelper;
 import controller.character.helpers.StartingMoneyHelper;
 import controller.character.helpers.StartingSkillPointsHelper;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import model.character.nonspellcaster.NonSpellcaster;
 import model.character.spellcaster.chartypes.Adept;
 import model.character.spellcaster.chartypes.SpecializedWizard;
@@ -120,6 +122,14 @@ public class CharacterSheetEditorStep1Controller {
     // Reference to the main application.
     private LaunchFXApp mainApp;
     
+    private SpellcasterTypeEnum lastSelectedSpellcasterTypeEnum;
+    private RaceEnum lastSelectedRaceEnum;
+    private PriorityClassEnum lastSelectedAttributePriorityEnum;
+    private PriorityClassEnum lastSelectedSkillPriorityEnum;
+    private PriorityClassEnum lastSelectedMoneyPriorityEnum;
+    
+    private Deque<PriorityClassEnum> stackForLastSelectedPrio = new ArrayDeque<PriorityClassEnum>();
+    
     private CharacterSheetEditorStep2Controller characterSheetEditorStep2Controller;
 
     public CharacterSheetEditorStep2Controller getCharacterSheetEditorStep2Controller() {
@@ -129,8 +139,6 @@ public class CharacterSheetEditorStep1Controller {
     public void setCharacterSheetEditorStep2Controller(CharacterSheetEditorStep2Controller characterSheetEditorStep2Controller) {
         this.characterSheetEditorStep2Controller = characterSheetEditorStep2Controller;
     }
-    
-    
     
     /**
      * Initializes the controller class.
@@ -167,15 +175,19 @@ public class CharacterSheetEditorStep1Controller {
     private void resetChoiceBoxes() {
         SpellcasterTypePriorityChoiceBox.getSelectionModel().clearSelection();
         SpellcasterTypePriorityChoiceBox.setValue(null);
+        SpellcasterTypePriorityChoiceBox.setDisable(false);
         RaceProrityChoiceBox.getSelectionModel().clearSelection();
         RaceProrityChoiceBox.setValue(null);
+        RaceProrityChoiceBox.setDisable(false);
         AttributePriorityChoiceBox.getSelectionModel().clearSelection();
         AttributePriorityChoiceBox.setValue(null);
+        AttributePriorityChoiceBox.setDisable(false);
         SkillsPriorityChoiceBox.getSelectionModel().clearSelection();
         SkillsPriorityChoiceBox.setValue(null);
+        SkillsPriorityChoiceBox.setDisable(false);
         MoneyPriorityChoiceBox.getSelectionModel().clearSelection();
         MoneyPriorityChoiceBox.setValue(null);
-        
+        MoneyPriorityChoiceBox.setDisable(false);
         
         //MoneyPriorityChoiceBox.getItems().removeAll((Object[])PriorityClassEnum.values());
         
@@ -188,52 +200,31 @@ public class CharacterSheetEditorStep1Controller {
         logger.info("Remaining prios:");
         logger.info(remainingPrios.toString());
 
-        final List<PriorityClassEnum> possibleValues = new ArrayList<>(remainingPrios);
+        List<PriorityClassEnum> possibleValues = new ArrayList<>(remainingPrios);
         
-        final ObservableList<PriorityClassEnum> possibleValuesObservable = new ObservableListWrapper<>(
+        ObservableList<PriorityClassEnum> possibleValuesObservable = new ObservableListWrapper<>(
                 possibleValues);
         
-        final List<SpellcasterTypeEnum> possibleSpellcasterTypes = 
+        List<SpellcasterTypeEnum> possibleSpellcasterTypes = 
                 SpellCasterChoiceBoxHelper.determineRemainingSpellcasterEnumChoices(remainingPrios);
         
-        final ObservableList<SpellcasterTypeEnum> possibleSpellcasterTypesObservable = new ObservableListWrapper<>(
+        ObservableList<SpellcasterTypeEnum> possibleSpellcasterTypesObservable = new ObservableListWrapper<>(
                 possibleSpellcasterTypes);
         
-        final List<RaceEnum> possibleRaceTypes = 
+        List<RaceEnum> possibleRaceTypes = 
                 RaceChoiceBoxHelper.determineRemainingRaceEnumChoices(remainingPrios);
         
-        final ObservableList<RaceEnum> possibleRaceTypesObservable = new ObservableListWrapper<>(
+        ObservableList<RaceEnum> possibleRaceTypesObservable = new ObservableListWrapper<>(
                 possibleRaceTypes);
         
-        if(SpellcasterTypePriorityChoiceBox.getSelectionModel().isEmpty() )  {
+        if(SpellcasterTypePriorityChoiceBox.getSelectionModel().isEmpty())  {
             logger.info("Rearranging empty SpellcasterTypeChoiceBox...");
-            
             SpellcasterTypePriorityChoiceBox.setItems(possibleSpellcasterTypesObservable);
-            
         }
-        else  if( SpellcasterTypePriorityChoiceBox.getValue() != null)   {
-//            //logger.debug("SpellcasterTypePriorityChoiceBox.getValue() == {}",SpellcasterTypePriorityChoiceBox.getValue().toString());
-//            
-            //SpellcasterTypeEnum tempEnum =(SpellcasterTypeEnum)SpellcasterTypePriorityChoiceBox.getValue();
-            //SpellcasterTypePriorityChoiceBox.getItems();
-            //possibleSpellcasterTypesObservable.add(tempEnum);
-            //SpellcasterTypePriorityChoiceBox.getSelectionModel().clearSelection();
-            //SpellcasterTypePriorityChoiceBox.getSelectionModel().selectFirst();
-            //SpellcasterTypePriorityChoiceBox.getItems().setAll(possibleSpellcasterTypesObservable);
-            //SpellcasterTypePriorityChoiceBox.getSelectionModel().select(tempEnum);
-            //possibleSpellcasterTypesObservable.remove(tempEnum);
-            //SpellcasterTypePriorityChoiceBox.getItems().addAll(possibleSpellcasterTypesObservable);
-            //boolean isModified = SpellcasterTypePriorityChoiceBox.getItems().setAll(possibleSpellcasterTypesObservable);
-            //SpellcasterTypePriorityChoiceBox.getSelectionModel().selectFirst();
-
-        }
-        
         if(RaceProrityChoiceBox.getSelectionModel().isEmpty())  {
             logger.info("Rearranging empty RaceChoiceBox...");
             RaceProrityChoiceBox.setItems(possibleRaceTypesObservable);
         }
-        
-        
         if(AttributePriorityChoiceBox.getSelectionModel().isEmpty())    {
             logger.info("Rearranging empty AttributesChoiceBox...");
             AttributePriorityChoiceBox.setItems(possibleValuesObservable);
@@ -245,6 +236,108 @@ public class CharacterSheetEditorStep1Controller {
         if(MoneyPriorityChoiceBox.getSelectionModel().isEmpty())    {
             logger.info("Rearranging empty MoneyChoiceBox...");
             MoneyPriorityChoiceBox.setItems(possibleValuesObservable);
+        }
+    }
+    
+    private void remainingPriosHelper(EnumSet<PriorityClassEnum> remainingPrios, ChoiceBox inActionChoiceBox) {
+        
+        logger.info("remainingPriosHelper() method called.");
+        logger.info("Remaining prios:");
+        logger.info(remainingPrios.toString());
+
+        List<PriorityClassEnum> possibleValues = new ArrayList<>(remainingPrios);
+        
+        ObservableList<PriorityClassEnum> possibleValuesObservable = new ObservableListWrapper<>(
+                possibleValues);
+        
+        List<SpellcasterTypeEnum> possibleSpellcasterTypes = 
+                SpellCasterChoiceBoxHelper.determineRemainingSpellcasterEnumChoices(remainingPrios);
+        
+        ObservableList<SpellcasterTypeEnum> possibleSpellcasterTypesObservable = new ObservableListWrapper<>(
+                possibleSpellcasterTypes);
+        
+        List<RaceEnum> possibleRaceTypes = 
+                RaceChoiceBoxHelper.determineRemainingRaceEnumChoices(remainingPrios);
+        
+        ObservableList<RaceEnum> possibleRaceTypesObservable = new ObservableListWrapper<>(
+                possibleRaceTypes);
+        
+        if(SpellcasterTypePriorityChoiceBox.getSelectionModel().isEmpty())  {
+            logger.info("Rearranging empty SpellcasterTypeChoiceBox...");
+            
+            SpellcasterTypePriorityChoiceBox.setItems(possibleSpellcasterTypesObservable);
+            
+        }
+        else  {
+            logger.info("Rearranging not empty SpellcasterTypeChoiceBox...");
+            if(!inActionChoiceBox.equals(SpellcasterTypePriorityChoiceBox))    {
+                SpellcasterTypePriorityChoiceBox.getItems()
+                        .remove(
+                                SpellCasterChoiceBoxHelper
+                                        .PrioEnumToSpellcasterEnum(
+                                                stackForLastSelectedPrio.peek(), lastSelectedRaceEnum
+                                        )
+                        );
+//                SpellcasterTypePriorityChoiceBox.getItems().retainAll(
+//                        SpellCasterChoiceBoxHelper.retainableSpellcasterTypes(remainingPrios, lastSelectedSpellcasterTypeEnum, lastSelectedRaceEnum)
+//                );
+            }
+        }
+        
+        if(RaceProrityChoiceBox.getSelectionModel().isEmpty())  {
+            logger.info("Rearranging empty RaceChoiceBox...");
+            RaceProrityChoiceBox.setItems(possibleRaceTypesObservable);
+        }
+        else  {
+            logger.info("Rearranging not empty RaceProrityChoiceBox...");
+            if(!inActionChoiceBox.equals(RaceProrityChoiceBox))    {
+                
+                RaceProrityChoiceBox.getItems()
+                        .removeAll(
+                                RaceChoiceBoxHelper
+                                        .priorityEnumToRaceEnum(
+                                                stackForLastSelectedPrio.peek()
+                                        )
+                                        
+                        );
+            }
+        }
+        
+        
+        if(AttributePriorityChoiceBox.getSelectionModel().isEmpty())    {
+            logger.info("Rearranging empty AttributesChoiceBox...");
+            AttributePriorityChoiceBox.setItems(possibleValuesObservable);
+        }
+        else  {
+            logger.info("Rearranging not empty AttributePriorityChoiceBox...");
+            if(!inActionChoiceBox.equals(AttributePriorityChoiceBox))    {
+                AttributePriorityChoiceBox.getItems()
+                        .remove(stackForLastSelectedPrio.peek());
+            }
+        }
+        
+        if(SkillsPriorityChoiceBox.getSelectionModel().isEmpty())    {
+            logger.info("Rearranging empty SkillsChoiceBox...");
+            SkillsPriorityChoiceBox.setItems(possibleValuesObservable);
+        }
+        else  {
+            logger.info("Rearranging not empty SkillsPriorityChoiceBox...");
+            if(!inActionChoiceBox.equals(SkillsPriorityChoiceBox))    {
+                SkillsPriorityChoiceBox.getItems()
+                        .remove(stackForLastSelectedPrio.peek());
+            }
+        }
+        
+        if(MoneyPriorityChoiceBox.getSelectionModel().isEmpty())    {
+            logger.info("Rearranging empty MoneyChoiceBox...");
+            MoneyPriorityChoiceBox.setItems(possibleValuesObservable);
+        }
+        else  {
+            logger.info("Rearranging not empty MoneyPriorityChoiceBox...");
+            if(!inActionChoiceBox.equals(MoneyPriorityChoiceBox))    {
+                MoneyPriorityChoiceBox.getItems()
+                        .remove(stackForLastSelectedPrio.peek());
+            }
         }
     }
     
@@ -400,20 +493,25 @@ public class CharacterSheetEditorStep1Controller {
     
     void resetValues()  {
         resetChoiceBoxes();
-        remainingPriosHelperOLD(remainingPrios);
+//        remainingPriosHelperOLD(remainingPrios);
         resetChoiceBoxes();
         resetPrios();
-        remainingPriosHelperOLD(remainingPrios);
+//        remainingPriosHelperOLD(remainingPrios);
         resetChoiceBoxes();
         resetLabels();
-        remainingPriosHelperOLD(remainingPrios);
+//        remainingPriosHelperOLD(remainingPrios);
         resetChoiceBoxes();
-        remainingPriosHelperOLD(remainingPrios);
+//        remainingPriosHelperOLD(remainingPrios);
         resetChoiceBoxes();
         resetPrios();
         remainingPriosHelperOLD(remainingPrios);
         //remainingPriosHelperForResetButton(remainingPrios);
         resetLabels();
+        lastSelectedSpellcasterTypeEnum = null;
+        lastSelectedRaceEnum = null;
+        lastSelectedAttributePriorityEnum = null;
+        lastSelectedSkillPriorityEnum = null;
+        lastSelectedMoneyPriorityEnum = null;
     }
     
     @FXML
@@ -748,6 +846,7 @@ public class CharacterSheetEditorStep1Controller {
                                                     .get(newValue.intValue()
                                                     ), remainingPrios)
                             );
+                            
                             break;
                         case 3: /*Specialized-Wizard*/   
                             SpellcasterTypePriorityLabel.setText(possibleSpellcasterValues.get(newValue.intValue()).toString());
@@ -761,6 +860,15 @@ public class CharacterSheetEditorStep1Controller {
                             break;
                         
                         }
+                        if(newValue.intValue() > -1)    {
+                            lastSelectedSpellcasterTypeEnum = possibleSpellcasterValues.get(newValue.intValue());
+                        }
+                        stackForLastSelectedPrio.push(SpellCasterChoiceBoxHelper
+                                .spellcasterEnumToPriorityEnumAdapter(
+                                        lastSelectedSpellcasterTypeEnum,
+                                        lastSelectedRaceEnum)
+                        );
+                        logger.info("Selected Wizard type: {}", lastSelectedSpellcasterTypeEnum);
                     // this switch is for managing the remainingPrios synched with the comboboxes
                     
                         if(value.intValue() > -1 )  {
@@ -818,40 +926,20 @@ public class CharacterSheetEditorStep1Controller {
                                                         ))
                                 );
                                 break;
-                            }
-//                            logger.debug("SpellcasterTypePriorityChoiceBox.getValue() == {}",SpellcasterTypePriorityChoiceBox.getValue().toString());
-//                            List<SpellcasterTypeEnum> possibleSpellcasterTypesOtherwise = 
-//                                SpellCasterChoiceBoxHelper.determineRemainingSpellcasterEnumChoices(remainingPrios);
-//                //            
-//                            SpellcasterTypeEnum tempEnum =(SpellcasterTypeEnum)SpellcasterTypePriorityChoiceBox.getValue();
-//                            possibleSpellcasterTypesOtherwise.add(tempEnum);
-//                //            //remainingPrios.add(SpellCasterChoiceBoxHelper.spellcasterEnumToPriorityEnumAdapter((SpellcasterTypeEnum) SpellcasterTypePriorityChoiceBox.getValue() ));
-//                ////        
-//                ////            ObservableList<SpellcasterTypeEnum> possibleSpellcasterTypesObservableOtherwise = new ObservableListWrapper<>(
-//                ////                    possibleSpellcasterTypes);
-//                ////            SpellcasterTypePriorityChoiceBox.setItems(possibleSpellcasterTypesObservableOtherwise);
-//                ////          
-//                //            logger.info( SpellcasterTypePriorityChoiceBox.getItems().toString());
-//                            boolean isModified = SpellcasterTypePriorityChoiceBox.getItems().setAll(possibleSpellcasterTypesOtherwise);
-//                //            logger.info( new Boolean(isModified).toString());
-//                //            //SpellcasterTypePriorityChoiceBox.getItems().add(tempEnum);
-//                //            logger.info( SpellcasterTypePriorityChoiceBox.getItems().toString());
-//                            SpellcasterTypePriorityChoiceBox.getSelectionModel().select(tempEnum);
-//                //            
-//                //            logger.info("Remaining prios:");
-//                //            logger.info(remainingPrios.toString());
-                            
+                            }                            
                         }
                     }
                     catch (NullPointerException e)    {
                         logger.info("FUCK ITS AN ERROR AT SpellcasterTypePriorityChoiceBox");
                     }
-                    
-                    
+                    catch (IndexOutOfBoundsException e)   {
+                        logger.info("FUCK ITS AN ERROR AT SpellcasterTypePriorityChoiceBox, IndexoutofBounds, but now worries");
+                    }
                     
                     logger.info(remainingPrios.toString());
-                    // This line updates 3 choiceboxes with reamining priorities
-                    remainingPriosHelper(remainingPrios);
+                    remainingPriosHelper(remainingPrios, SpellcasterTypePriorityChoiceBox);
+//                    remainingPriosHelper(remainingPrios);
+//                    SpellcasterTypePriorityChoiceBox.setDisable(true);
                 }
         );
         
@@ -922,58 +1010,98 @@ public class CharacterSheetEditorStep1Controller {
                             break;
                     }
                     // this switch is for managing the remainingPrios synched with the comboboxes
-                    if(value.intValue() > -1)   {
-                        switch(value.intValue()) {
-                            case 0: 
-                                remainingPrios.add(
-                                        RaceChoiceBoxHelper
-                                        .raceEnumToPriorityEnumAdapter(
-                                                possibleRaceValues
-                                                        .get(value.intValue()
-                                                        ))
-                                );
-                                break;
-                            case 1: 
-                                remainingPrios.add(
-                                        RaceChoiceBoxHelper
-                                        .raceEnumToPriorityEnumAdapter(
-                                                possibleRaceValues
-                                                        .get(value.intValue()
-                                                        ))
-                                );
-                                break;
-                            case 2:  
-                                remainingPrios.add(
-                                        RaceChoiceBoxHelper
-                                        .raceEnumToPriorityEnumAdapter(
-                                                possibleRaceValues
-                                                        .get(value.intValue()
-                                                        ))
-                                );
-                                break;
-                            case 3:
-                                remainingPrios.add(
-                                        RaceChoiceBoxHelper
-                                        .raceEnumToPriorityEnumAdapter(
-                                                possibleRaceValues
-                                                        .get(value.intValue()
-                                                        ))
-                                );
-                                break;
-                            case 4: remainingPrios.add(
-                                        RaceChoiceBoxHelper
-                                        .raceEnumToPriorityEnumAdapter(
-                                                possibleRaceValues
-                                                        .get(value.intValue()
-                                                        ))
-                                );
-                                break;
+                    try {
+                        if( (value.intValue() > -1) && (
+                                RaceChoiceBoxHelper.raceEnumToPriorityEnumAdapter(
+                                        possibleRaceValues.get(value.intValue())) != 
+                                                RaceChoiceBoxHelper.raceEnumToPriorityEnumAdapter(possibleRaceValues.get(newValue.intValue())))
+                                &&
+                                    !(
+                                        (SpellcasterTypePriorityChoiceBox.getValue() == SpellcasterTypeEnum.NON_SPELLCASTER)
+                                        &&
+                                        (
+                                            (
+                                                (
+                                                    (possibleRaceValues.get(newValue.intValue()) == RaceEnum.HUMAN || possibleRaceValues.get(value.intValue()) == RaceEnum.HUMAN)
+                                                    &&
+                                                    (possibleRaceValues.get(newValue.intValue()) == RaceEnum.DWARF || possibleRaceValues.get(value.intValue()) == RaceEnum.DWARF)
+                                                )
+                                                ||
+                                                (
+                                                    (possibleRaceValues.get(newValue.intValue()) == RaceEnum.ORC || possibleRaceValues.get(value.intValue()) == RaceEnum.ORC)
+                                                    &&
+                                                    (possibleRaceValues.get(newValue.intValue()) == RaceEnum.HUMAN || possibleRaceValues.get(value.intValue()) == RaceEnum.HUMAN)
+                                                )
+                                            )
+                                        )
+                                    )
+                          )   {
+                            switch(value.intValue()) {
+                                case 0: 
+                                    remainingPrios.add(
+                                            RaceChoiceBoxHelper
+                                            .raceEnumToPriorityEnumAdapter(
+                                                    possibleRaceValues
+                                                            .get(value.intValue()
+                                                            ))
+                                    );
+                                    break;
+                                case 1: 
+                                    remainingPrios.add(
+                                            RaceChoiceBoxHelper
+                                            .raceEnumToPriorityEnumAdapter(
+                                                    possibleRaceValues
+                                                            .get(value.intValue()
+                                                            ))
+                                    );
+                                    break;
+                                case 2:  
+                                    remainingPrios.add(
+                                            RaceChoiceBoxHelper
+                                            .raceEnumToPriorityEnumAdapter(
+                                                    possibleRaceValues
+                                                            .get(value.intValue()
+                                                            ))
+                                    );
+                                    break;
+                                case 3:
+                                    remainingPrios.add(
+                                            RaceChoiceBoxHelper
+                                            .raceEnumToPriorityEnumAdapter(
+                                                    possibleRaceValues
+                                                            .get(value.intValue()
+                                                            ))
+                                    );
+                                    break;
+                                case 4: remainingPrios.add(
+                                            RaceChoiceBoxHelper
+                                            .raceEnumToPriorityEnumAdapter(
+                                                    possibleRaceValues
+                                                            .get(value.intValue()
+                                                            ))
+                                    );
+                                    break;
+                            }
                         }
                     }
+                    catch (IndexOutOfBoundsException e)   {
+                        logger.info("FUCK ITS AN ERROR AT SpellcasterTypePriorityChoiceBox, IndexoutofBounds, but now worries");
+                    }
                     
+//                    lastSelectedRaceEnum = (RaceEnum) RaceProrityChoiceBox.getValue();
+                    if(newValue.intValue() > -1)    {
+                        lastSelectedRaceEnum = possibleRaceValues.get(newValue.intValue());
+                    }
+                    stackForLastSelectedPrio.push(
+                            RaceChoiceBoxHelper
+                                    .raceEnumToPriorityEnumAdapter(lastSelectedRaceEnum, 
+                                            lastSelectedSpellcasterTypeEnum)
+                    );
+                    logger.info("Selected race: {}", lastSelectedRaceEnum);
                     logger.info("Remaining prios:");
                     logger.info(remainingPrios.toString());
-                    remainingPriosHelper(remainingPrios);
+                    remainingPriosHelper(remainingPrios, RaceProrityChoiceBox);
+//                    RaceProrityChoiceBox.setDisable(true);
                 }
         );
 
@@ -1017,15 +1145,14 @@ public class CharacterSheetEditorStep1Controller {
                                 remainingPrios.remove(possibleAttrValues.get(newValue.intValue()));
                                 break;
                             default:
-                                AttributePriorityLabel.setText("");
+//                                AttributePriorityLabel.setText("");
                         }
                     }
                     catch(IndexOutOfBoundsException e)  {
-                        AttributePriorityLabel.setText("");
+                        //AttributePriorityLabel.setText("");
                         logger.error("Exception caught: ");
                         logger.error("While trying to set new attr label or remove from remaining prios.");
 
-                        //remainingPriosHelperSkillsAndMoney(remainingPrios);
                     }
                     logger.info("removing from remaining prios at attributes.");
                     try {
@@ -1058,11 +1185,15 @@ public class CharacterSheetEditorStep1Controller {
                         logger.error("Exception caught: ");
                         logger.error("While add back to remainingPrios varaible at AttributeChoicebox.");
                         remainingPrios.add((PriorityClassEnum)AttributePriorityChoiceBox.getValue());
-                        //remainingPriosHelperSkillsAndMoney(remainingPrios);
                     }
+                    if(newValue.intValue() > -1)    {
+                        lastSelectedAttributePriorityEnum = possibleAttrValues.get(newValue.intValue());
+                    }
+                    stackForLastSelectedPrio.push(lastSelectedAttributePriorityEnum);
                     logger.info("Attribute prio choosen. Remaining prios:");
                     logger.info(remainingPrios.toString());
-                    remainingPriosHelper(remainingPrios);
+                    remainingPriosHelper(remainingPrios, AttributePriorityChoiceBox);
+//                    AttributePriorityChoiceBox.setDisable(true);
                 }
         );
         
@@ -1079,9 +1210,6 @@ public class CharacterSheetEditorStep1Controller {
                     try {
                         switch(newValue.intValue()) {
                             case -1:
-                                //SkillsPriorityLabel.setText("");
-                                //remainingPrios.add((PriorityClassEnum)SkillsPriorityChoiceBox.getValue());
-                                //remainingPriosHelperSkillsAndMoney(remainingPrios);
                                 break;
                             case 0:  
                                 SkillsPriorityLabel.setText(niceTextForSkillLabel(possibleSkillValues.get(newValue.intValue()).toString()));
@@ -1111,7 +1239,6 @@ public class CharacterSheetEditorStep1Controller {
                         SkillsPriorityLabel.setText("");
                         logger.error("Exception caught: ");
                         logger.error("While trying to set new skill label or remove from remaining prios.");
-                        //remainingPriosHelperSkillsAndMoney(remainingPrios);
                     }
                     finally {
                         
@@ -1140,18 +1267,24 @@ public class CharacterSheetEditorStep1Controller {
                         }
                     }
                     catch(IndexOutOfBoundsException e)  {
-                        SkillsPriorityLabel.setText("");
+//                        SkillsPriorityLabel.setText("");
                         logger.error("Exception caught: ");
                         logger.error("While add back to remainingPrios varaible at SkillChoiceBox.");        
                         remainingPrios.add((PriorityClassEnum)SkillsPriorityChoiceBox.getValue());
-                        //remainingPriosHelperSkillsAndMoney(remainingPrios);
                     }
                     finally {
                         
                     }
+//                    lastSelectedSkillPriorityEnum = (PriorityClassEnum) SkillsPriorityChoiceBox.getValue();
+                    if(newValue.intValue() > -1)    {
+                        lastSelectedSkillPriorityEnum = possibleSkillValues.get(newValue.intValue());    
+                    }
+                    stackForLastSelectedPrio.push(lastSelectedSkillPriorityEnum);
+                    logger.info("Selected Skill priority: {}", lastSelectedSkillPriorityEnum);
                     logger.info("Attribute skill choosen. Remaining prios:");
                     logger.info(remainingPrios.toString());
-                    remainingPriosHelper(remainingPrios);
+                    remainingPriosHelper(remainingPrios, SkillsPriorityChoiceBox);
+//                    SkillsPriorityChoiceBox.setDisable(true);
                 }
         );
         
@@ -1167,9 +1300,6 @@ public class CharacterSheetEditorStep1Controller {
                     try {
                         switch(newValue.intValue()) {
                             case -1:
-                                //MoneyPriorityLabel.setText("");
-                                //remainingPrios.add((PriorityClassEnum)SkillsPriorityChoiceBox.getValue());
-                                //remainingPriosHelperSkillsAndMoney(remainingPrios);
                                 break;
                             case 0:  
                                 MoneyPriorityLabel.setText(niceTextForMoneyLabel(possibleMoneyValues.get(newValue.intValue()).toString()));
@@ -1199,7 +1329,6 @@ public class CharacterSheetEditorStep1Controller {
                         MoneyPriorityLabel.setText("");
                         logger.error("Exception caught: ");
                         logger.error("While trying to set new money label or remove from remaining prios.");
-                        //remainingPriosHelperSkillsAndMoney(remainingPrios);
                     }
                     finally {
                         
@@ -1232,14 +1361,20 @@ public class CharacterSheetEditorStep1Controller {
                         logger.error("Exception caught: ");
                         logger.error("While add back to remainingPrios varaible at SkillChoiceBox.");
                         remainingPrios.add((PriorityClassEnum)SkillsPriorityChoiceBox.getValue());
-                        //remainingPriosHelperSkillsAndMoney(remainingPrios);
                     }
                     finally {
                         
                     }
+//                    lastSelectedMoneyPriorityEnum = (PriorityClassEnum) MoneyPriorityChoiceBox.getValue();
+                    if(newValue.intValue() > -1)    {
+                        lastSelectedMoneyPriorityEnum = possibleMoneyValues.get(newValue.intValue());
+                    }
+                    stackForLastSelectedPrio.push(lastSelectedMoneyPriorityEnum);
+                    logger.info("Selected money prio: {}", lastSelectedMoneyPriorityEnum);
                     logger.info("Attribute skill choosen. Remaining prios:");
                     logger.info(remainingPrios.toString());
-                    remainingPriosHelper(remainingPrios);
+                    remainingPriosHelper(remainingPrios, MoneyPriorityChoiceBox);
+//                    MoneyPriorityChoiceBox.setDisable(true);
                 }
         );
         

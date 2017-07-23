@@ -31,7 +31,7 @@ public class RaceChoiceBoxHelper {
             raceList.add(RaceEnum.DWARF);
             raceList.add(RaceEnum.ORC);
         }
-        if(reminingPrios.contains(PriorityClassEnum.PRIORITY_E))    {
+        if(reminingPrios.contains(PriorityClassEnum.PRIORITY_E) || reminingPrios.contains(PriorityClassEnum.PRIORITY_D))    {
             raceList.add(RaceEnum.HUMAN);
         }
         return raceList;
@@ -79,6 +79,43 @@ public class RaceChoiceBoxHelper {
             }
             return prioEnum;
     }
+    public static List<RaceEnum> priorityEnumToRaceEnum(PriorityClassEnum prioEnum)    {
+        List<RaceEnum> raceEnumListOutput = new ArrayList<>();
+        if(prioEnum == PriorityClassEnum.PRIORITY_E)  {
+            raceEnumListOutput.add(RaceEnum.HUMAN);
+        }
+        if(prioEnum == PriorityClassEnum.PRIORITY_C)  {
+            raceEnumListOutput.add(RaceEnum.ELF);
+            raceEnumListOutput.add(RaceEnum.TROLL);
+        }
+        if(prioEnum == PriorityClassEnum.PRIORITY_D)  {
+            raceEnumListOutput.add(RaceEnum.DWARF);
+            raceEnumListOutput.add(RaceEnum.ORC);
+        }
+        return raceEnumListOutput;
+    }    
+    public static List<RaceEnum> priorityEnumToRaceEnum(PriorityClassEnum prioEnum, 
+            SpellcasterTypeEnum spellcasterEnum, RaceEnum raceEnum)    {
+        List<RaceEnum> raceEnumListOutput = new ArrayList<>();
+        if(prioEnum == PriorityClassEnum.PRIORITY_E)  {
+            raceEnumListOutput.add(RaceEnum.HUMAN);
+        }
+        if(prioEnum == PriorityClassEnum.PRIORITY_C)  {
+            raceEnumListOutput.add(RaceEnum.ELF);
+            raceEnumListOutput.add(RaceEnum.TROLL);
+        }
+        if(prioEnum == PriorityClassEnum.PRIORITY_D)  {
+            raceEnumListOutput.add(RaceEnum.DWARF);
+            raceEnumListOutput.add(RaceEnum.ORC);
+//            if(spellcasterEnum == SpellcasterTypeEnum.NON_SPELLCASTER
+//                &&
+//                raceEnum == RaceEnum.HUMAN) {
+//                raceEnumListOutput.add(RaceEnum.HUMAN);
+//            }
+        }
+        return raceEnumListOutput;
+    }   
+    
     public static PriorityClassEnum 
         raceEnumToPriorityEnumAdapter(RaceEnum raceEnum, EnumSet<PriorityClassEnum> reminingPrios)  {
             PriorityClassEnum prioEnum = null;
