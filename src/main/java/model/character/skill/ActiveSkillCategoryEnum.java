@@ -9,13 +9,11 @@ package model.character.skill;
  *
  * @author Dr.Chase
  */
-public class LanguageSkill {
-    private String nameOfLanguage;
-    private int level;
-    
-    private boolean isSpecialized;
-    private String specialization;
-    
-    private String description;
-    
+public enum ActiveSkillCategoryEnum {
+    COMBAT,
+    MAGIC,
+    PHYSICAL,
+    SOCIAL,
+    TECHNICAL,
+    VEHICLE
 }
