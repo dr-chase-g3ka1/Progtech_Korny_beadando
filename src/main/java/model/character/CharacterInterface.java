@@ -5,6 +5,9 @@
  */
 package model.character;
 
+import model.character.skill.LanguageSkill;
+import model.character.skill.Knowledge;
+import model.character.skill.Skill;
 import java.util.List;
 import model.character.spellcaster.TraditionTypeEnum;
 import model.character.spellcaster.spell.AbstractSpell;

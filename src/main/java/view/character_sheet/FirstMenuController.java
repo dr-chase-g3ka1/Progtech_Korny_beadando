@@ -56,6 +56,9 @@ public class FirstMenuController {
     @FXML
     private Button LoadButton;
     
+    @FXML
+    private Button ManageActiveSkillsButton;
+    
     final FileChooser fileChooser = new FileChooser();
     
     @FXML

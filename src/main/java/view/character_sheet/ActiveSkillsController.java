@@ -28,7 +28,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.character.AbstractCharacter;
 import model.character.PriorityClassEnum;
-import model.character.Skill;
+import model.character.skill.Skill;
 import shadowrunchargenproto_v0.pkg0.LaunchFXApp;
 
 /**
